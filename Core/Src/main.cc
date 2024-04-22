@@ -20,7 +20,7 @@
 // #include <arm_cmse.h>
 
 #include "main.h"
-#include "gpio.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -87,7 +87,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  MX_USART6_UART_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -99,7 +99,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_4);
     HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_3);
-    HAL_Delay(500);
+    HAL_Delay(110);
   }
   /* USER CODE END 3 */
 }

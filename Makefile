@@ -37,11 +37,15 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 Core/Src/gpio.c \
+Core/Src/usart.c \
 Core/Src/stm32f7xx_it.c \
 Core/Src/stm32f7xx_hal_msp.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart_ex.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.c \
@@ -51,10 +55,24 @@ Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c \
-Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_exti.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sd.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sdram.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma2d.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc_ex.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dcmi.c \
+Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dcmi_ex.c \
+Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.c \
+Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sd.c \
+Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_lcd.c \
+Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.c \
+Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c \
+Drivers/BSP/Components/ov9655/ov9655.c \
 Core/Src/system_stm32f7xx.c
 
 # C++ sources
@@ -121,7 +139,10 @@ C_INCLUDES =  \
 -IDrivers/STM32F7xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F7xx/Include \
 -IDrivers/CMSIS/Include \
--ICMSIS_6/CMSIS/Core/Include
+-IDrivers/BSP/STM32746G-Discovery \
+-IDrivers/BSP/Components/ov9655 \
+-IFonts 
+
 
 
 # compile gcc flags

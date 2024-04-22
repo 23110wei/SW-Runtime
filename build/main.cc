@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cceKfg2i.s 			page 1
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -51,14 +51,14 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
   20:Core/Src/main.cc **** // #include <arm_cmse.h>
   21:Core/Src/main.cc **** 
   22:Core/Src/main.cc **** #include "main.h"
-  23:Core/Src/main.cc **** #include "gpio.h"
+  23:Core/Src/main.cc **** 
   24:Core/Src/main.cc **** 
   25:Core/Src/main.cc **** /* Private includes ----------------------------------------------------------*/
   26:Core/Src/main.cc **** /* USER CODE BEGIN Includes */
   27:Core/Src/main.cc **** 
   28:Core/Src/main.cc **** /* USER CODE END Includes */
   29:Core/Src/main.cc **** 
-ARM GAS  /tmp/cceKfg2i.s 			page 2
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 2
 
 
   30:Core/Src/main.cc **** /* Private typedef -----------------------------------------------------------*/
@@ -118,13 +118,13 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
   84:Core/Src/main.cc **** 
   85:Core/Src/main.cc ****   /* USER CODE END SysInit */
   86:Core/Src/main.cc **** 
-ARM GAS  /tmp/cceKfg2i.s 			page 3
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 3
 
 
   87:Core/Src/main.cc ****   /* Initialize all configured peripherals */
   88:Core/Src/main.cc ****   MX_GPIO_Init();
   89:Core/Src/main.cc ****   /* USER CODE BEGIN 2 */
-  90:Core/Src/main.cc **** 
+  90:Core/Src/main.cc ****   MX_USART6_UART_Init();
   91:Core/Src/main.cc ****   /* USER CODE END 2 */
   92:Core/Src/main.cc **** 
   93:Core/Src/main.cc ****   /* Infinite loop */
@@ -136,7 +136,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
   99:Core/Src/main.cc ****     /* USER CODE BEGIN 3 */
  100:Core/Src/main.cc ****     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_4);
  101:Core/Src/main.cc ****     HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_3);
- 102:Core/Src/main.cc ****     HAL_Delay(500);
+ 102:Core/Src/main.cc ****     HAL_Delay(110);
  103:Core/Src/main.cc ****   }
  104:Core/Src/main.cc ****   /* USER CODE END 3 */
  105:Core/Src/main.cc **** }
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
  141:Core/Src/main.cc ****     Error_Handler();
  142:Core/Src/main.cc ****   }
  143:Core/Src/main.cc **** 
-ARM GAS  /tmp/cceKfg2i.s 			page 4
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 4
 
 
  144:Core/Src/main.cc ****   /** Initializes the CPU, AHB and APB buses clocks
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
   17:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
   18:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Unless required by applicable law or agreed to in writing, software
   19:Drivers/CMSIS/Include/cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
-ARM GAS  /tmp/cceKfg2i.s 			page 5
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 5
 
 
   20:Drivers/CMSIS/Include/cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
   74:Drivers/CMSIS/Include/cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
   75:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
   76:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
-ARM GAS  /tmp/cceKfg2i.s 			page 6
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 6
 
 
   77:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
  131:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie i" : : : "memory");
  132:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  133:Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cceKfg2i.s 			page 7
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 7
 
 
  134:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
  113:Core/Src/main.cc ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   84              		.loc 1 113 22 is_stmt 0 view .LVU8
   85 0004 3022     		movs	r2, #48
-ARM GAS  /tmp/cceKfg2i.s 			page 8
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 8
 
 
   86 0006 0021     		movs	r1, #0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
  127 0040 029B     		ldr	r3, [sp, #8]
  128              	.LBE7:
  119:Core/Src/main.cc **** 
-ARM GAS  /tmp/cceKfg2i.s 			page 9
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 9
 
 
  129              		.loc 1 119 3 view .LVU22
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
  132:Core/Src/main.cc ****   {
  165              		.loc 1 132 3 discriminator 1 view .LVU41
  166 006a B0B9     		cbnz	r0, .L8
-ARM GAS  /tmp/cceKfg2i.s 			page 10
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 10
 
 
  139:Core/Src/main.cc ****   {
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
  204              		.cfi_remember_state
  205              		.cfi_def_cfa_offset 4
  206              		@ sp needed
-ARM GAS  /tmp/cceKfg2i.s 			page 11
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 11
 
 
  207 0096 5DF804FB 		ldr	pc, [sp], #4
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
   74:Core/Src/main.cc **** 
  255              		.loc 1 74 11 is_stmt 0 view .LVU67
  256 0002 FFF7FEFF 		bl	HAL_Init
-ARM GAS  /tmp/cceKfg2i.s 			page 12
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 12
 
 
  257              	.LVL7:
@@ -674,73 +674,80 @@ ARM GAS  /tmp/cceKfg2i.s 			page 1
  263              		.loc 1 88 15 is_stmt 0 view .LVU71
  264 000a FFF7FEFF 		bl	MX_GPIO_Init
  265              	.LVL9:
- 266              	.L14:
+  90:Core/Src/main.cc ****   /* USER CODE END 2 */
+ 266              		.loc 1 90 3 is_stmt 1 view .LVU72
+  90:Core/Src/main.cc ****   /* USER CODE END 2 */
+ 267              		.loc 1 90 22 is_stmt 0 view .LVU73
+ 268 000e FFF7FEFF 		bl	MX_USART6_UART_Init
+ 269              	.LVL10:
+ 270              	.L14:
   95:Core/Src/main.cc ****   {
- 267              		.loc 1 95 3 is_stmt 1 view .LVU72
+ 271              		.loc 1 95 3 is_stmt 1 view .LVU74
  100:Core/Src/main.cc ****     HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_3);
- 268              		.loc 1 100 5 view .LVU73
+ 272              		.loc 1 100 5 view .LVU75
  100:Core/Src/main.cc ****     HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_3);
- 269              		.loc 1 100 23 is_stmt 0 view .LVU74
- 270 000e 1021     		movs	r1, #16
- 271 0010 0548     		ldr	r0, .L16
- 272 0012 FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 273              	.LVL10:
- 101:Core/Src/main.cc ****     HAL_Delay(500);
- 274              		.loc 1 101 5 is_stmt 1 view .LVU75
- 101:Core/Src/main.cc ****     HAL_Delay(500);
- 275              		.loc 1 101 23 is_stmt 0 view .LVU76
- 276 0016 0821     		movs	r1, #8
- 277 0018 0448     		ldr	r0, .L16+4
- 278 001a FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 279              	.LVL11:
+ 273              		.loc 1 100 23 is_stmt 0 view .LVU76
+ 274 0012 1021     		movs	r1, #16
+ 275 0014 0548     		ldr	r0, .L16
+ 276 0016 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 277              	.LVL11:
+ 101:Core/Src/main.cc ****     HAL_Delay(110);
+ 278              		.loc 1 101 5 is_stmt 1 view .LVU77
+ 101:Core/Src/main.cc ****     HAL_Delay(110);
+ 279              		.loc 1 101 23 is_stmt 0 view .LVU78
+ 280 001a 0821     		movs	r1, #8
+ 281 001c 0448     		ldr	r0, .L16+4
+ 282 001e FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 283              	.LVL12:
  102:Core/Src/main.cc ****   }
- 280              		.loc 1 102 5 is_stmt 1 discriminator 1 view .LVU77
+ 284              		.loc 1 102 5 is_stmt 1 discriminator 1 view .LVU79
  102:Core/Src/main.cc ****   }
- 281              		.loc 1 102 14 is_stmt 0 discriminator 1 view .LVU78
- 282 001e 4FF4FA70 		mov	r0, #500
- 283 0022 FFF7FEFF 		bl	HAL_Delay
- 284              	.LVL12:
+ 285              		.loc 1 102 14 is_stmt 0 discriminator 1 view .LVU80
+ 286 0022 6E20     		movs	r0, #110
+ 287 0024 FFF7FEFF 		bl	HAL_Delay
+ 288              	.LVL13:
   95:Core/Src/main.cc ****   {
- 285              		.loc 1 95 3 is_stmt 1 view .LVU79
- 286 0026 F2E7     		b	.L14
- 287              	.L17:
- 288              		.align	2
- 289              	.L16:
- 290 0028 000C0240 		.word	1073875968
- 291 002c 00100240 		.word	1073876992
- 292              		.cfi_endproc
- 293              	.LFE141:
- 294              		.fnend
- 296              		.text
- 297              	.Letext0:
- 298              		.file 3 "/home/rlai/Tools/arm-none-eabi/arm-none-eabi/include/machine/_default_types.h"
- 299              		.file 4 "/home/rlai/Tools/arm-none-eabi/arm-none-eabi/include/sys/_stdint.h"
- 300              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
- 301              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 302              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h"
-ARM GAS  /tmp/cceKfg2i.s 			page 13
+ 289              		.loc 1 95 3 is_stmt 1 view .LVU81
+ 290 0028 F3E7     		b	.L14
+ 291              	.L17:
+ 292 002a 00BF     		.align	2
+ 293              	.L16:
+ 294 002c 000C0240 		.word	1073875968
+ 295 0030 00100240 		.word	1073876992
+ 296              		.cfi_endproc
+ 297              	.LFE141:
+ 298              		.fnend
+ 300              		.text
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 13
 
 
- 303              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h"
- 304              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
- 305              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
- 306              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h"
- 307              		.file 12 "Core/Inc/gpio.h"
-ARM GAS  /tmp/cceKfg2i.s 			page 14
+ 301              	.Letext0:
+ 302              		.file 3 "D:/arm-none-eabi-gcc/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-too
+ 303              		.file 4 "D:/arm-none-eabi-gcc/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-too
+ 304              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
+ 305              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 306              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h"
+ 307              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h"
+ 308              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 309              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
+ 310              		.file 11 "Core/Inc/usart.h"
+ 311              		.file 12 "Core/Inc/gpio.h"
+ 312              		.file 13 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h"
+ARM GAS  D:\cygwin64\tmp\ccLG8Dcf.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.cc
-     /tmp/cceKfg2i.s:21     .text.Error_Handler:00000000 $t
-     /tmp/cceKfg2i.s:27     .text.Error_Handler:00000000 Error_Handler
+D:\cygwin64\tmp\ccLG8Dcf.s:21     .text.Error_Handler:00000000 $t
+D:\cygwin64\tmp\ccLG8Dcf.s:27     .text.Error_Handler:00000000 Error_Handler
     .ARM.exidx.text.Error_Handler:00000000 $d
-     /tmp/cceKfg2i.s:61     .text._Z18SystemClock_Configv:00000000 $t
-     /tmp/cceKfg2i.s:67     .text._Z18SystemClock_Configv:00000000 _Z18SystemClock_Configv
-     /tmp/cceKfg2i.s:228    .text._Z18SystemClock_Configv:000000a8 $d
+D:\cygwin64\tmp\ccLG8Dcf.s:61     .text._Z18SystemClock_Configv:00000000 $t
+D:\cygwin64\tmp\ccLG8Dcf.s:67     .text._Z18SystemClock_Configv:00000000 _Z18SystemClock_Configv
+D:\cygwin64\tmp\ccLG8Dcf.s:228    .text._Z18SystemClock_Configv:000000a8 $d
 .ARM.exidx.text._Z18SystemClock_Configv:00000000 $d
-     /tmp/cceKfg2i.s:235    .text.main:00000000 $t
-     /tmp/cceKfg2i.s:241    .text.main:00000000 main
-     /tmp/cceKfg2i.s:290    .text.main:00000028 $d
+D:\cygwin64\tmp\ccLG8Dcf.s:235    .text.main:00000000 $t
+D:\cygwin64\tmp\ccLG8Dcf.s:241    .text.main:00000000 main
+D:\cygwin64\tmp\ccLG8Dcf.s:294    .text.main:0000002c $d
              .ARM.extab.text.main:00000000 $d
              .ARM.exidx.text.main:00000000 $d
 
@@ -752,6 +759,7 @@ HAL_RCC_ClockConfig
 __aeabi_unwind_cpp_pr0
 HAL_Init
 MX_GPIO_Init
+MX_USART6_UART_Init
 HAL_GPIO_TogglePin
 HAL_Delay
 __aeabi_unwind_cpp_pr1

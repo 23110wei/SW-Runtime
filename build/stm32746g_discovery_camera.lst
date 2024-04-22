@@ -1,0 +1,2418 @@
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32746g_discovery_camera.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c"
+  20              		.section	.text.GetSize,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	GetSize:
+  27              	.LVL0:
+  28              	.LFB153:
+   1:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+   2:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   ******************************************************************************
+   3:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @file    stm32746g_discovery_camera.c
+   4:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @author  MCD Application Team
+   5:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief   This file includes the driver for Camera modules mounted on
+   6:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *          STM32746G-Discovery board.
+   7:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *
+   8:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   ******************************************************************************
+   9:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @attention
+  10:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *
+  11:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * Copyright (c) 2016 STMicroelectronics.
+  12:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * All rights reserved.
+  13:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *
+  14:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  15:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * in the root directory of this software component.
+  16:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  17:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *
+  18:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   ******************************************************************************
+  19:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   @verbatim
+  20:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     How to use this driver:
+  21:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     ------------------------
+  22:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****      - This driver is used to drive the camera.
+  23:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****      - The OV9655 component driver MUST be included with this driver.
+  24:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     
+  25:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     Driver description:
+  26:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     -------------------
+  27:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     + Initialization steps:
+  28:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****        o Initialize the camera using the BSP_CAMERA_Init() function.
+  29:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****        o Start the camera capture/snapshot using the CAMERA_Start() function.
+  30:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****        o Suspend, resume or stop the camera capture using the following functions:
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 2
+
+
+  31:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****         - BSP_CAMERA_Suspend()
+  32:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****         - BSP_CAMERA_Resume()
+  33:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****         - BSP_CAMERA_Stop()
+  34:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****         
+  35:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     + Options
+  36:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****        o Increase or decrease on the fly the brightness and/or contrast
+  37:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****          using the following function:
+  38:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****          - BSP_CAMERA_ContrastBrightnessConfig 
+  39:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****        o Add a special effect on the fly using the following functions:
+  40:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****          - BSP_CAMERA_BlackWhiteConfig()
+  41:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****          - BSP_CAMERA_ColorEffectConfig()
+  42:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   @endverbatim
+  43:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   ******************************************************************************
+  44:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */ 
+  45:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+  46:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /* Dependencies
+  47:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** - stm32746g_discovery.c
+  48:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** - stm32f7xx_hal_dcmi.c
+  49:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** - stm32f7xx_hal_dma.c
+  50:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** - stm32f7xx_hal_gpio.c
+  51:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** - stm32f7xx_hal_cortex.c
+  52:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** - stm32f7xx_hal_rcc_ex.h
+  53:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** - ov9655.c
+  54:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** EndDependencies */
+  55:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+  56:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /* Includes ------------------------------------------------------------------*/
+  57:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #include "stm32746g_discovery_camera.h"
+  58:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #include "stm32746g_discovery.h"
+  59:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+  60:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /** @addtogroup BSP
+  61:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @{
+  62:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+  63:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+  64:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /** @addtogroup STM32746G_DISCOVERY
+  65:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @{
+  66:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+  67:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     
+  68:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /** @addtogroup STM32746G_DISCOVERY_CAMERA
+  69:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @{
+  70:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */ 
+  71:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+  72:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /** @defgroup STM32746G_DISCOVERY_CAMERA_Private_TypesDefinitions STM32746G_DISCOVERY_CAMERA Privat
+  73:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @{
+  74:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */ 
+  75:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+  76:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @}
+  77:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */ 
+  78:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+  79:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /** @defgroup STM32746G_DISCOVERY_CAMERA_Private_Defines STM32746G_DISCOVERY_CAMERA Private Defines
+  80:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @{
+  81:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+  82:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #define CAMERA_VGA_RES_X          640
+  83:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #define CAMERA_VGA_RES_Y          480
+  84:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #define CAMERA_480x272_RES_X      480
+  85:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #define CAMERA_480x272_RES_Y      272
+  86:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #define CAMERA_QVGA_RES_X         320
+  87:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #define CAMERA_QVGA_RES_Y         240
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 3
+
+
+  88:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #define CAMERA_QQVGA_RES_X        160
+  89:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** #define CAMERA_QQVGA_RES_Y        120
+  90:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+  91:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @}
+  92:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */ 
+  93:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+  94:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /** @defgroup STM32746G_DISCOVERY_CAMERA_Private_Macros STM32746G_DISCOVERY_CAMERA Private Macros
+  95:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @{
+  96:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+  97:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+  98:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @}
+  99:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */  
+ 100:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 101:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /** @defgroup STM32746G_DISCOVERY_CAMERA_Private_Variables STM32746G_DISCOVERY_CAMERA Private Varia
+ 102:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @{
+ 103:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */ 
+ 104:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** DCMI_HandleTypeDef  hDcmiHandler;
+ 105:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** CAMERA_DrvTypeDef   *camera_drv;
+ 106:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /* Camera current resolution naming (QQVGA, VGA, ...) */
+ 107:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** static uint32_t CameraCurrentResolution;
+ 108:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 109:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /* Camera module I2C HW address */
+ 110:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** static uint32_t CameraHwAddress;
+ 111:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 112:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @}
+ 113:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */ 
+ 114:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 115:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /** @defgroup STM32746G_DISCOVERY_CAMERA_Private_FunctionPrototypes STM32746G_DISCOVERY_CAMERA Priv
+ 116:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @{
+ 117:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 118:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** static uint32_t GetSize(uint32_t resolution);
+ 119:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 120:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @}
+ 121:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */ 
+ 122:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 123:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /** @defgroup STM32746G_DISCOVERY_CAMERA_Exported_Functions STM32746G_DISCOVERY_CAMERA Exported Fun
+ 124:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @{
+ 125:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 126:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 127:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 128:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Initializes the camera.
+ 129:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  Resolution : camera sensor requested resolution (x, y) : standard resolution
+ 130:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *         naming QQVGA, QVGA, VGA ...
+ 131:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval Camera status
+ 132:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 133:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** uint8_t BSP_CAMERA_Init(uint32_t Resolution)
+ 134:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** { 
+ 135:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   DCMI_HandleTypeDef *phdcmi;
+ 136:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   uint8_t status = CAMERA_ERROR;
+ 137:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 138:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Get the DCMI handle structure */
+ 139:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi = &hDcmiHandler;
+ 140:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 141:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /*** Configures the DCMI to interface with the camera module ***/
+ 142:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* DCMI configuration */
+ 143:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.CaptureRate      = DCMI_CR_ALL_FRAME;
+ 144:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.HSPolarity       = DCMI_HSPOLARITY_LOW;
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 4
+
+
+ 145:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.SynchroMode      = DCMI_SYNCHRO_HARDWARE;
+ 146:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.VSPolarity       = DCMI_VSPOLARITY_HIGH;
+ 147:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.ExtendedDataMode = DCMI_EXTEND_DATA_8B;
+ 148:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.PCKPolarity      = DCMI_PCKPOLARITY_RISING;
+ 149:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Instance              = DCMI;
+ 150:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 151:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Power up camera */
+ 152:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_PwrUp();
+ 153:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 154:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Read ID of Camera module via I2C */
+ 155:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(ov9655_ReadID(CAMERA_I2C_ADDRESS) == OV9655_ID)
+ 156:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 157:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     /* Initialize the camera driver structure */
+ 158:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     camera_drv = &ov9655_drv;
+ 159:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     CameraHwAddress = CAMERA_I2C_ADDRESS;
+ 160:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 161:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     /* DCMI Initialization */
+ 162:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     BSP_CAMERA_MspInit(&hDcmiHandler, NULL);
+ 163:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     HAL_DCMI_Init(phdcmi);
+ 164:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 165:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     /* Camera Module Initialization via I2C to the wanted 'Resolution' */
+ 166:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     if (Resolution == CAMERA_R480x272)
+ 167:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     {     /* For 480x272 resolution, the OV9655 sensor is set to VGA resolution
+ 168:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****            * as OV9655 doesn't supports 480x272 resolution,
+ 169:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****            * then DCMI is configured to output a 480x272 cropped window */
+ 170:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       camera_drv->Init(CameraHwAddress, CAMERA_R640x480);
+ 171:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       HAL_DCMI_ConfigCROP(phdcmi,           /* Crop in the middle of the VGA picture */
+ 172:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****                          (CAMERA_VGA_RES_X - CAMERA_480x272_RES_X)/2,
+ 173:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****                          (CAMERA_VGA_RES_Y - CAMERA_480x272_RES_Y)/2,
+ 174:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****                          (CAMERA_480x272_RES_X * 2) - 1,
+ 175:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****                           CAMERA_480x272_RES_Y - 1);
+ 176:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       HAL_DCMI_EnableCROP(phdcmi);
+ 177:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+ 178:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     else
+ 179:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     {
+ 180:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       camera_drv->Init(CameraHwAddress, Resolution);
+ 181:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       HAL_DCMI_DisableCROP(phdcmi);
+ 182:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+ 183:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 184:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     CameraCurrentResolution = Resolution;
+ 185:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 186:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     /* Return CAMERA_OK status */
+ 187:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     status = CAMERA_OK;
+ 188:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }
+ 189:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   else
+ 190:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 191:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     /* Return CAMERA_NOT_SUPPORTED status */
+ 192:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     status = CAMERA_NOT_SUPPORTED;
+ 193:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }
+ 194:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 195:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   return status;
+ 196:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 197:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 198:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 199:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  DeInitializes the camera.
+ 200:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval Camera status
+ 201:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 5
+
+
+ 202:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** uint8_t BSP_CAMERA_DeInit(void)
+ 203:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** { 
+ 204:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hDcmiHandler.Instance              = DCMI;
+ 205:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 206:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_DCMI_DeInit(&hDcmiHandler);
+ 207:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_MspDeInit(&hDcmiHandler, NULL);
+ 208:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   return CAMERA_OK;
+ 209:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 210:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 211:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 212:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Starts the camera capture in continuous mode.
+ 213:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  buff: pointer to the camera output buffer
+ 214:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 215:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 216:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void BSP_CAMERA_ContinuousStart(uint8_t *buff)
+ 217:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** { 
+ 218:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Start the camera capture */
+ 219:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_DCMI_Start_DMA(&hDcmiHandler, DCMI_MODE_CONTINUOUS, (uint32_t)buff, GetSize(CameraCurrentReso
+ 220:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 221:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 222:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 223:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Starts the camera capture in snapshot mode.
+ 224:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  buff: pointer to the camera output buffer
+ 225:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 226:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 227:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void BSP_CAMERA_SnapshotStart(uint8_t *buff)
+ 228:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** { 
+ 229:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Start the camera capture */
+ 230:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_DCMI_Start_DMA(&hDcmiHandler, DCMI_MODE_SNAPSHOT, (uint32_t)buff, GetSize(CameraCurrentResolu
+ 231:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 232:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 233:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 234:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief Suspend the CAMERA capture 
+ 235:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 236:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 237:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void BSP_CAMERA_Suspend(void) 
+ 238:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 239:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Suspend the Camera Capture */
+ 240:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_DCMI_Suspend(&hDcmiHandler);  
+ 241:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 242:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 243:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 244:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief Resume the CAMERA capture 
+ 245:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 246:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 247:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void BSP_CAMERA_Resume(void) 
+ 248:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 249:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Start the Camera Capture */
+ 250:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_DCMI_Resume(&hDcmiHandler);
+ 251:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 252:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 253:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 254:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Stop the CAMERA capture 
+ 255:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval Camera status
+ 256:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 257:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** uint8_t BSP_CAMERA_Stop(void) 
+ 258:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 6
+
+
+ 259:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   uint8_t status = CAMERA_ERROR;
+ 260:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 261:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(HAL_DCMI_Stop(&hDcmiHandler) == HAL_OK)
+ 262:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 263:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****      status = CAMERA_OK;
+ 264:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }
+ 265:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 266:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Set Camera in Power Down */
+ 267:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_PwrDown();
+ 268:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 269:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   return status;
+ 270:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 271:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 272:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 273:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  CANERA power up
+ 274:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 275:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 276:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void BSP_CAMERA_PwrUp(void)
+ 277:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 278:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 279:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 280:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Enable GPIO clock */
+ 281:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_GPIOH_CLK_ENABLE();
+ 282:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 283:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /*** Configure the GPIO ***/
+ 284:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Configure DCMI GPIO as alternate function */
+ 285:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pin       = GPIO_PIN_13;
+ 286:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
+ 287:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_NOPULL;
+ 288:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 289:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure);
+ 290:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 291:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* De-assert the camera POWER_DOWN pin (active high) */
+ 292:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_WritePin(GPIOH, GPIO_PIN_13, GPIO_PIN_RESET);
+ 293:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 294:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_Delay(3);     /* POWER_DOWN de-asserted during 3ms */
+ 295:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 296:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 297:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 298:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  CAMERA power down
+ 299:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 300:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 301:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void BSP_CAMERA_PwrDown(void)
+ 302:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 303:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 304:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 305:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Enable GPIO clock */
+ 306:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_GPIOH_CLK_ENABLE();
+ 307:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 308:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /*** Configure the GPIO ***/
+ 309:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Configure DCMI GPIO as alternate function */
+ 310:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pin       = GPIO_PIN_13;
+ 311:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
+ 312:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_NOPULL;
+ 313:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 314:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure);
+ 315:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 7
+
+
+ 316:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Assert the camera POWER_DOWN pin (active high) */
+ 317:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_WritePin(GPIOH, GPIO_PIN_13, GPIO_PIN_SET);
+ 318:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 319:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 320:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 321:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Configures the camera contrast and brightness.
+ 322:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  contrast_level: Contrast level
+ 323:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *          This parameter can be one of the following values:
+ 324:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_CONTRAST_LEVEL4: for contrast +2
+ 325:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_CONTRAST_LEVEL3: for contrast +1
+ 326:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_CONTRAST_LEVEL2: for contrast  0
+ 327:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_CONTRAST_LEVEL1: for contrast -1
+ 328:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_CONTRAST_LEVEL0: for contrast -2
+ 329:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  brightness_level: Contrast level
+ 330:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *          This parameter can be one of the following values:
+ 331:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_BRIGHTNESS_LEVEL4: for brightness +2
+ 332:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_BRIGHTNESS_LEVEL3: for brightness +1
+ 333:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_BRIGHTNESS_LEVEL2: for brightness  0
+ 334:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_BRIGHTNESS_LEVEL1: for brightness -1
+ 335:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_BRIGHTNESS_LEVEL0: for brightness -2    
+ 336:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 337:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 338:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void BSP_CAMERA_ContrastBrightnessConfig(uint32_t contrast_level, uint32_t brightness_level)
+ 339:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 340:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(camera_drv->Config != NULL)
+ 341:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 342:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     camera_drv->Config(CameraHwAddress, CAMERA_CONTRAST_BRIGHTNESS, contrast_level, brightness_leve
+ 343:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }  
+ 344:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 345:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 346:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 347:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Configures the camera white balance.
+ 348:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  Mode: black_white mode
+ 349:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *          This parameter can be one of the following values:
+ 350:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_BLACK_WHITE_BW
+ 351:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_BLACK_WHITE_NEGATIVE
+ 352:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_BLACK_WHITE_BW_NEGATIVE
+ 353:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_BLACK_WHITE_NORMAL       
+ 354:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 355:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 356:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void BSP_CAMERA_BlackWhiteConfig(uint32_t Mode)
+ 357:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 358:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(camera_drv->Config != NULL)
+ 359:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 360:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     camera_drv->Config(CameraHwAddress, CAMERA_BLACK_WHITE, Mode, 0);
+ 361:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }  
+ 362:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 363:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 364:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 365:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Configures the camera color effect.
+ 366:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  Effect: Color effect
+ 367:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *          This parameter can be one of the following values:
+ 368:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_COLOR_EFFECT_ANTIQUE               
+ 369:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_COLOR_EFFECT_BLUE        
+ 370:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_COLOR_EFFECT_GREEN    
+ 371:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   *            @arg  CAMERA_COLOR_EFFECT_RED        
+ 372:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 8
+
+
+ 373:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 374:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void BSP_CAMERA_ColorEffectConfig(uint32_t Effect)
+ 375:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 376:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(camera_drv->Config != NULL)
+ 377:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 378:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     camera_drv->Config(CameraHwAddress, CAMERA_COLOR_EFFECT, Effect, 0);
+ 379:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }  
+ 380:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 381:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 382:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 383:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Get the capture size in pixels unit.
+ 384:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  resolution: the current resolution.
+ 385:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval capture size in pixels unit.
+ 386:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 387:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** static uint32_t GetSize(uint32_t resolution)
+ 388:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** { 
+  29              		.loc 1 388 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+ 389:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   uint32_t size = 0;
+  34              		.loc 1 389 3 view .LVU1
+ 390:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 391:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Get capture size */
+ 392:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   switch (resolution)
+  35              		.loc 1 392 3 view .LVU2
+  36 0000 0328     		cmp	r0, #3
+  37 0002 03D8     		bhi	.L2
+  38 0004 DFE800F0 		tbb	[pc, r0]
+  39              	.L4:
+  40 0008 0D       		.byte	(.L8-.L4)/2
+  41 0009 04       		.byte	(.L6-.L4)/2
+  42 000a 07       		.byte	(.L5-.L4)/2
+  43 000b 0A       		.byte	(.L3-.L4)/2
+  44              		.p2align 1
+  45              	.L2:
+  46 000c 0020     		movs	r0, #0
+  47              	.LVL1:
+  48              		.loc 1 392 3 is_stmt 0 view .LVU3
+  49 000e 7047     		bx	lr
+  50              	.LVL2:
+  51              	.L6:
+ 393:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 394:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   case CAMERA_R160x120:
+ 395:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     {
+ 396:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       size =  0x2580;
+ 397:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+ 398:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     break;    
+ 399:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   case CAMERA_R320x240:
+ 400:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     {
+ 401:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       size =  0x9600;
+  52              		.loc 1 401 7 is_stmt 1 view .LVU4
+ 402:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+ 403:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     break;
+  53              		.loc 1 403 5 view .LVU5
+ 401:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 9
+
+
+  54              		.loc 1 401 12 is_stmt 0 view .LVU6
+  55 0010 4FF41640 		mov	r0, #38400
+  56              	.LVL3:
+  57              		.loc 1 403 5 view .LVU7
+  58 0014 7047     		bx	lr
+  59              	.LVL4:
+  60              	.L5:
+ 404:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   case CAMERA_R480x272:
+ 405:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     {
+ 406:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       size =  0xFF00;
+  61              		.loc 1 406 7 is_stmt 1 view .LVU8
+ 407:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+ 408:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     break;
+  62              		.loc 1 408 5 view .LVU9
+ 406:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+  63              		.loc 1 406 12 is_stmt 0 view .LVU10
+  64 0016 4FF47F40 		mov	r0, #65280
+  65              	.LVL5:
+  66              		.loc 1 408 5 view .LVU11
+  67 001a 7047     		bx	lr
+  68              	.LVL6:
+  69              	.L3:
+ 409:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   case CAMERA_R640x480:
+ 410:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     {
+ 411:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       size =  0x25800;
+  70              		.loc 1 411 7 is_stmt 1 view .LVU12
+ 412:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }    
+ 413:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     break;
+  71              		.loc 1 413 5 view .LVU13
+ 411:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }    
+  72              		.loc 1 411 12 is_stmt 0 view .LVU14
+  73 001c 4FF41630 		mov	r0, #153600
+  74              	.LVL7:
+  75              		.loc 1 413 5 view .LVU15
+  76 0020 7047     		bx	lr
+  77              	.LVL8:
+  78              	.L8:
+ 396:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+  79              		.loc 1 396 12 view .LVU16
+  80 0022 4FF41650 		mov	r0, #9600
+  81              	.LVL9:
+ 414:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   default:
+ 415:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     {
+ 416:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       break;
+ 417:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+ 418:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }
+ 419:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 420:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   return size;
+  82              		.loc 1 420 3 is_stmt 1 view .LVU17
+ 421:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+  83              		.loc 1 421 1 is_stmt 0 view .LVU18
+  84 0026 7047     		bx	lr
+  85              		.cfi_endproc
+  86              	.LFE153:
+  88              		.section	.text.BSP_CAMERA_ContinuousStart,"ax",%progbits
+  89              		.align	1
+  90              		.global	BSP_CAMERA_ContinuousStart
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 10
+
+
+  91              		.syntax unified
+  92              		.thumb
+  93              		.thumb_func
+  95              	BSP_CAMERA_ContinuousStart:
+  96              	.LVL10:
+  97              	.LFB143:
+ 217:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Start the camera capture */
+  98              		.loc 1 217 1 is_stmt 1 view -0
+  99              		.cfi_startproc
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Start the camera capture */
+ 102              		.loc 1 217 1 is_stmt 0 view .LVU20
+ 103 0000 10B5     		push	{r4, lr}
+ 104              	.LCFI0:
+ 105              		.cfi_def_cfa_offset 8
+ 106              		.cfi_offset 4, -8
+ 107              		.cfi_offset 14, -4
+ 108 0002 0446     		mov	r4, r0
+ 219:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 109              		.loc 1 219 3 is_stmt 1 view .LVU21
+ 110 0004 054B     		ldr	r3, .L11
+ 111 0006 1868     		ldr	r0, [r3]
+ 112              	.LVL11:
+ 219:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 113              		.loc 1 219 3 is_stmt 0 view .LVU22
+ 114 0008 FFF7FEFF 		bl	GetSize
+ 115              	.LVL12:
+ 116 000c 0346     		mov	r3, r0
+ 219:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 117              		.loc 1 219 3 discriminator 1 view .LVU23
+ 118 000e 2246     		mov	r2, r4
+ 119 0010 0021     		movs	r1, #0
+ 120 0012 0348     		ldr	r0, .L11+4
+ 121 0014 FFF7FEFF 		bl	HAL_DCMI_Start_DMA
+ 122              	.LVL13:
+ 220:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 123              		.loc 1 220 1 view .LVU24
+ 124 0018 10BD     		pop	{r4, pc}
+ 125              	.LVL14:
+ 126              	.L12:
+ 220:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 127              		.loc 1 220 1 view .LVU25
+ 128 001a 00BF     		.align	2
+ 129              	.L11:
+ 130 001c 00000000 		.word	CameraCurrentResolution
+ 131 0020 00000000 		.word	hDcmiHandler
+ 132              		.cfi_endproc
+ 133              	.LFE143:
+ 135              		.section	.text.BSP_CAMERA_SnapshotStart,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	BSP_CAMERA_SnapshotStart
+ 138              		.syntax unified
+ 139              		.thumb
+ 140              		.thumb_func
+ 142              	BSP_CAMERA_SnapshotStart:
+ 143              	.LVL15:
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 11
+
+
+ 144              	.LFB144:
+ 228:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Start the camera capture */
+ 145              		.loc 1 228 1 is_stmt 1 view -0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Start the camera capture */
+ 149              		.loc 1 228 1 is_stmt 0 view .LVU27
+ 150 0000 10B5     		push	{r4, lr}
+ 151              	.LCFI1:
+ 152              		.cfi_def_cfa_offset 8
+ 153              		.cfi_offset 4, -8
+ 154              		.cfi_offset 14, -4
+ 155 0002 0446     		mov	r4, r0
+ 230:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 156              		.loc 1 230 3 is_stmt 1 view .LVU28
+ 157 0004 054B     		ldr	r3, .L15
+ 158 0006 1868     		ldr	r0, [r3]
+ 159              	.LVL16:
+ 230:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 160              		.loc 1 230 3 is_stmt 0 view .LVU29
+ 161 0008 FFF7FEFF 		bl	GetSize
+ 162              	.LVL17:
+ 163 000c 0346     		mov	r3, r0
+ 230:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 164              		.loc 1 230 3 discriminator 1 view .LVU30
+ 165 000e 2246     		mov	r2, r4
+ 166 0010 0221     		movs	r1, #2
+ 167 0012 0348     		ldr	r0, .L15+4
+ 168 0014 FFF7FEFF 		bl	HAL_DCMI_Start_DMA
+ 169              	.LVL18:
+ 231:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 170              		.loc 1 231 1 view .LVU31
+ 171 0018 10BD     		pop	{r4, pc}
+ 172              	.LVL19:
+ 173              	.L16:
+ 231:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 174              		.loc 1 231 1 view .LVU32
+ 175 001a 00BF     		.align	2
+ 176              	.L15:
+ 177 001c 00000000 		.word	CameraCurrentResolution
+ 178 0020 00000000 		.word	hDcmiHandler
+ 179              		.cfi_endproc
+ 180              	.LFE144:
+ 182              		.section	.text.BSP_CAMERA_Suspend,"ax",%progbits
+ 183              		.align	1
+ 184              		.global	BSP_CAMERA_Suspend
+ 185              		.syntax unified
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	BSP_CAMERA_Suspend:
+ 190              	.LFB145:
+ 238:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Suspend the Camera Capture */
+ 191              		.loc 1 238 1 is_stmt 1 view -0
+ 192              		.cfi_startproc
+ 193              		@ args = 0, pretend = 0, frame = 0
+ 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 12
+
+
+ 195 0000 08B5     		push	{r3, lr}
+ 196              	.LCFI2:
+ 197              		.cfi_def_cfa_offset 8
+ 198              		.cfi_offset 3, -8
+ 199              		.cfi_offset 14, -4
+ 240:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 200              		.loc 1 240 3 view .LVU34
+ 201 0002 0248     		ldr	r0, .L19
+ 202 0004 FFF7FEFF 		bl	HAL_DCMI_Suspend
+ 203              	.LVL20:
+ 241:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 204              		.loc 1 241 1 is_stmt 0 view .LVU35
+ 205 0008 08BD     		pop	{r3, pc}
+ 206              	.L20:
+ 207 000a 00BF     		.align	2
+ 208              	.L19:
+ 209 000c 00000000 		.word	hDcmiHandler
+ 210              		.cfi_endproc
+ 211              	.LFE145:
+ 213              		.section	.text.BSP_CAMERA_Resume,"ax",%progbits
+ 214              		.align	1
+ 215              		.global	BSP_CAMERA_Resume
+ 216              		.syntax unified
+ 217              		.thumb
+ 218              		.thumb_func
+ 220              	BSP_CAMERA_Resume:
+ 221              	.LFB146:
+ 248:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Start the Camera Capture */
+ 222              		.loc 1 248 1 is_stmt 1 view -0
+ 223              		.cfi_startproc
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226 0000 08B5     		push	{r3, lr}
+ 227              	.LCFI3:
+ 228              		.cfi_def_cfa_offset 8
+ 229              		.cfi_offset 3, -8
+ 230              		.cfi_offset 14, -4
+ 250:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 231              		.loc 1 250 3 view .LVU37
+ 232 0002 0248     		ldr	r0, .L23
+ 233 0004 FFF7FEFF 		bl	HAL_DCMI_Resume
+ 234              	.LVL21:
+ 251:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 235              		.loc 1 251 1 is_stmt 0 view .LVU38
+ 236 0008 08BD     		pop	{r3, pc}
+ 237              	.L24:
+ 238 000a 00BF     		.align	2
+ 239              	.L23:
+ 240 000c 00000000 		.word	hDcmiHandler
+ 241              		.cfi_endproc
+ 242              	.LFE146:
+ 244              		.section	.text.BSP_CAMERA_PwrUp,"ax",%progbits
+ 245              		.align	1
+ 246              		.global	BSP_CAMERA_PwrUp
+ 247              		.syntax unified
+ 248              		.thumb
+ 249              		.thumb_func
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 13
+
+
+ 251              	BSP_CAMERA_PwrUp:
+ 252              	.LFB148:
+ 277:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 253              		.loc 1 277 1 is_stmt 1 view -0
+ 254              		.cfi_startproc
+ 255              		@ args = 0, pretend = 0, frame = 24
+ 256              		@ frame_needed = 0, uses_anonymous_args = 0
+ 257 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 258              	.LCFI4:
+ 259              		.cfi_def_cfa_offset 20
+ 260              		.cfi_offset 4, -20
+ 261              		.cfi_offset 5, -16
+ 262              		.cfi_offset 6, -12
+ 263              		.cfi_offset 7, -8
+ 264              		.cfi_offset 14, -4
+ 265 0002 87B0     		sub	sp, sp, #28
+ 266              	.LCFI5:
+ 267              		.cfi_def_cfa_offset 48
+ 278:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 268              		.loc 1 278 3 view .LVU40
+ 281:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 269              		.loc 1 281 3 view .LVU41
+ 270              	.LBB2:
+ 281:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 271              		.loc 1 281 3 view .LVU42
+ 281:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 272              		.loc 1 281 3 view .LVU43
+ 273 0004 104B     		ldr	r3, .L27
+ 274 0006 1A6B     		ldr	r2, [r3, #48]
+ 275 0008 42F08002 		orr	r2, r2, #128
+ 276 000c 1A63     		str	r2, [r3, #48]
+ 281:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 277              		.loc 1 281 3 view .LVU44
+ 278 000e 1B6B     		ldr	r3, [r3, #48]
+ 279 0010 03F08003 		and	r3, r3, #128
+ 280 0014 0093     		str	r3, [sp]
+ 281:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 281              		.loc 1 281 3 view .LVU45
+ 282 0016 009B     		ldr	r3, [sp]
+ 283              	.LBE2:
+ 281:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 284              		.loc 1 281 3 view .LVU46
+ 285:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
+ 285              		.loc 1 285 3 view .LVU47
+ 285:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
+ 286              		.loc 1 285 33 is_stmt 0 view .LVU48
+ 287 0018 4FF40056 		mov	r6, #8192
+ 288 001c 0196     		str	r6, [sp, #4]
+ 286:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_NOPULL;
+ 289              		.loc 1 286 3 is_stmt 1 view .LVU49
+ 286:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_NOPULL;
+ 290              		.loc 1 286 33 is_stmt 0 view .LVU50
+ 291 001e 0123     		movs	r3, #1
+ 292 0020 0293     		str	r3, [sp, #8]
+ 287:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 293              		.loc 1 287 3 is_stmt 1 view .LVU51
+ 287:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 14
+
+
+ 294              		.loc 1 287 33 is_stmt 0 view .LVU52
+ 295 0022 0027     		movs	r7, #0
+ 296 0024 0397     		str	r7, [sp, #12]
+ 288:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure);
+ 297              		.loc 1 288 3 is_stmt 1 view .LVU53
+ 288:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure);
+ 298              		.loc 1 288 33 is_stmt 0 view .LVU54
+ 299 0026 0324     		movs	r4, #3
+ 300 0028 0494     		str	r4, [sp, #16]
+ 289:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 301              		.loc 1 289 3 is_stmt 1 view .LVU55
+ 302 002a 084D     		ldr	r5, .L27+4
+ 303 002c 01A9     		add	r1, sp, #4
+ 304 002e 2846     		mov	r0, r5
+ 305 0030 FFF7FEFF 		bl	HAL_GPIO_Init
+ 306              	.LVL22:
+ 292:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 307              		.loc 1 292 3 view .LVU56
+ 308 0034 3A46     		mov	r2, r7
+ 309 0036 3146     		mov	r1, r6
+ 310 0038 2846     		mov	r0, r5
+ 311 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 312              	.LVL23:
+ 294:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 313              		.loc 1 294 3 view .LVU57
+ 314 003e 2046     		mov	r0, r4
+ 315 0040 FFF7FEFF 		bl	HAL_Delay
+ 316              	.LVL24:
+ 295:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 317              		.loc 1 295 1 is_stmt 0 view .LVU58
+ 318 0044 07B0     		add	sp, sp, #28
+ 319              	.LCFI6:
+ 320              		.cfi_def_cfa_offset 20
+ 321              		@ sp needed
+ 322 0046 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 323              	.L28:
+ 324              		.align	2
+ 325              	.L27:
+ 326 0048 00380240 		.word	1073887232
+ 327 004c 001C0240 		.word	1073880064
+ 328              		.cfi_endproc
+ 329              	.LFE148:
+ 331              		.section	.text.BSP_CAMERA_PwrDown,"ax",%progbits
+ 332              		.align	1
+ 333              		.global	BSP_CAMERA_PwrDown
+ 334              		.syntax unified
+ 335              		.thumb
+ 336              		.thumb_func
+ 338              	BSP_CAMERA_PwrDown:
+ 339              	.LFB149:
+ 302:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 340              		.loc 1 302 1 is_stmt 1 view -0
+ 341              		.cfi_startproc
+ 342              		@ args = 0, pretend = 0, frame = 24
+ 343              		@ frame_needed = 0, uses_anonymous_args = 0
+ 344 0000 70B5     		push	{r4, r5, r6, lr}
+ 345              	.LCFI7:
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 15
+
+
+ 346              		.cfi_def_cfa_offset 16
+ 347              		.cfi_offset 4, -16
+ 348              		.cfi_offset 5, -12
+ 349              		.cfi_offset 6, -8
+ 350              		.cfi_offset 14, -4
+ 351 0002 86B0     		sub	sp, sp, #24
+ 352              	.LCFI8:
+ 353              		.cfi_def_cfa_offset 40
+ 303:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 354              		.loc 1 303 3 view .LVU60
+ 306:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 355              		.loc 1 306 3 view .LVU61
+ 356              	.LBB3:
+ 306:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 357              		.loc 1 306 3 view .LVU62
+ 306:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 358              		.loc 1 306 3 view .LVU63
+ 359 0004 0F4B     		ldr	r3, .L31
+ 360 0006 1A6B     		ldr	r2, [r3, #48]
+ 361 0008 42F08002 		orr	r2, r2, #128
+ 362 000c 1A63     		str	r2, [r3, #48]
+ 306:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 363              		.loc 1 306 3 view .LVU64
+ 364 000e 1B6B     		ldr	r3, [r3, #48]
+ 365 0010 03F08003 		and	r3, r3, #128
+ 366 0014 0093     		str	r3, [sp]
+ 306:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 367              		.loc 1 306 3 view .LVU65
+ 368 0016 009B     		ldr	r3, [sp]
+ 369              	.LBE3:
+ 306:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 370              		.loc 1 306 3 view .LVU66
+ 310:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
+ 371              		.loc 1 310 3 view .LVU67
+ 310:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
+ 372              		.loc 1 310 33 is_stmt 0 view .LVU68
+ 373 0018 4FF40055 		mov	r5, #8192
+ 374 001c 0195     		str	r5, [sp, #4]
+ 311:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_NOPULL;
+ 375              		.loc 1 311 3 is_stmt 1 view .LVU69
+ 311:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_NOPULL;
+ 376              		.loc 1 311 33 is_stmt 0 view .LVU70
+ 377 001e 0126     		movs	r6, #1
+ 378 0020 0296     		str	r6, [sp, #8]
+ 312:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 379              		.loc 1 312 3 is_stmt 1 view .LVU71
+ 312:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 380              		.loc 1 312 33 is_stmt 0 view .LVU72
+ 381 0022 0023     		movs	r3, #0
+ 382 0024 0393     		str	r3, [sp, #12]
+ 313:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure);
+ 383              		.loc 1 313 3 is_stmt 1 view .LVU73
+ 313:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure);
+ 384              		.loc 1 313 33 is_stmt 0 view .LVU74
+ 385 0026 0323     		movs	r3, #3
+ 386 0028 0493     		str	r3, [sp, #16]
+ 314:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 16
+
+
+ 387              		.loc 1 314 3 is_stmt 1 view .LVU75
+ 388 002a 074C     		ldr	r4, .L31+4
+ 389 002c 01A9     		add	r1, sp, #4
+ 390 002e 2046     		mov	r0, r4
+ 391 0030 FFF7FEFF 		bl	HAL_GPIO_Init
+ 392              	.LVL25:
+ 317:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 393              		.loc 1 317 3 view .LVU76
+ 394 0034 3246     		mov	r2, r6
+ 395 0036 2946     		mov	r1, r5
+ 396 0038 2046     		mov	r0, r4
+ 397 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 398              	.LVL26:
+ 318:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 399              		.loc 1 318 1 is_stmt 0 view .LVU77
+ 400 003e 06B0     		add	sp, sp, #24
+ 401              	.LCFI9:
+ 402              		.cfi_def_cfa_offset 16
+ 403              		@ sp needed
+ 404 0040 70BD     		pop	{r4, r5, r6, pc}
+ 405              	.L32:
+ 406 0042 00BF     		.align	2
+ 407              	.L31:
+ 408 0044 00380240 		.word	1073887232
+ 409 0048 001C0240 		.word	1073880064
+ 410              		.cfi_endproc
+ 411              	.LFE149:
+ 413              		.section	.text.BSP_CAMERA_Stop,"ax",%progbits
+ 414              		.align	1
+ 415              		.global	BSP_CAMERA_Stop
+ 416              		.syntax unified
+ 417              		.thumb
+ 418              		.thumb_func
+ 420              	BSP_CAMERA_Stop:
+ 421              	.LFB147:
+ 258:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   uint8_t status = CAMERA_ERROR;
+ 422              		.loc 1 258 1 is_stmt 1 view -0
+ 423              		.cfi_startproc
+ 424              		@ args = 0, pretend = 0, frame = 0
+ 425              		@ frame_needed = 0, uses_anonymous_args = 0
+ 426 0000 10B5     		push	{r4, lr}
+ 427              	.LCFI10:
+ 428              		.cfi_def_cfa_offset 8
+ 429              		.cfi_offset 4, -8
+ 430              		.cfi_offset 14, -4
+ 259:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 431              		.loc 1 259 3 view .LVU79
+ 432              	.LVL27:
+ 261:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 433              		.loc 1 261 3 view .LVU80
+ 261:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 434              		.loc 1 261 6 is_stmt 0 view .LVU81
+ 435 0002 0548     		ldr	r0, .L36
+ 436 0004 FFF7FEFF 		bl	HAL_DCMI_Stop
+ 437              	.LVL28:
+ 261:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 438              		.loc 1 261 5 discriminator 1 view .LVU82
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 17
+
+
+ 439 0008 0446     		mov	r4, r0
+ 440 000a 00B1     		cbz	r0, .L34
+ 259:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 441              		.loc 1 259 11 view .LVU83
+ 442 000c 0124     		movs	r4, #1
+ 443              	.L34:
+ 444              	.LVL29:
+ 267:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 445              		.loc 1 267 3 is_stmt 1 view .LVU84
+ 446 000e FFF7FEFF 		bl	BSP_CAMERA_PwrDown
+ 447              	.LVL30:
+ 269:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 448              		.loc 1 269 3 view .LVU85
+ 270:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 449              		.loc 1 270 1 is_stmt 0 view .LVU86
+ 450 0012 2046     		mov	r0, r4
+ 451 0014 10BD     		pop	{r4, pc}
+ 452              	.LVL31:
+ 453              	.L37:
+ 270:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 454              		.loc 1 270 1 view .LVU87
+ 455 0016 00BF     		.align	2
+ 456              	.L36:
+ 457 0018 00000000 		.word	hDcmiHandler
+ 458              		.cfi_endproc
+ 459              	.LFE147:
+ 461              		.section	.text.BSP_CAMERA_ContrastBrightnessConfig,"ax",%progbits
+ 462              		.align	1
+ 463              		.global	BSP_CAMERA_ContrastBrightnessConfig
+ 464              		.syntax unified
+ 465              		.thumb
+ 466              		.thumb_func
+ 468              	BSP_CAMERA_ContrastBrightnessConfig:
+ 469              	.LVL32:
+ 470              	.LFB150:
+ 339:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(camera_drv->Config != NULL)
+ 471              		.loc 1 339 1 is_stmt 1 view -0
+ 472              		.cfi_startproc
+ 473              		@ args = 0, pretend = 0, frame = 0
+ 474              		@ frame_needed = 0, uses_anonymous_args = 0
+ 339:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(camera_drv->Config != NULL)
+ 475              		.loc 1 339 1 is_stmt 0 view .LVU89
+ 476 0000 10B5     		push	{r4, lr}
+ 477              	.LCFI11:
+ 478              		.cfi_def_cfa_offset 8
+ 479              		.cfi_offset 4, -8
+ 480              		.cfi_offset 14, -4
+ 481 0002 0B46     		mov	r3, r1
+ 340:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 482              		.loc 1 340 3 is_stmt 1 view .LVU90
+ 340:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 483              		.loc 1 340 16 is_stmt 0 view .LVU91
+ 484 0004 0449     		ldr	r1, .L41
+ 485              	.LVL33:
+ 340:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 486              		.loc 1 340 16 view .LVU92
+ 487 0006 0968     		ldr	r1, [r1]
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 18
+
+
+ 488 0008 8C68     		ldr	r4, [r1, #8]
+ 340:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 489              		.loc 1 340 5 view .LVU93
+ 490 000a 24B1     		cbz	r4, .L38
+ 491 000c 0246     		mov	r2, r0
+ 342:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }  
+ 492              		.loc 1 342 5 is_stmt 1 view .LVU94
+ 493 000e 0021     		movs	r1, #0
+ 494 0010 0248     		ldr	r0, .L41+4
+ 495              	.LVL34:
+ 342:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }  
+ 496              		.loc 1 342 5 is_stmt 0 view .LVU95
+ 497 0012 0088     		ldrh	r0, [r0]
+ 498 0014 A047     		blx	r4
+ 499              	.LVL35:
+ 500              	.L38:
+ 344:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 501              		.loc 1 344 1 view .LVU96
+ 502 0016 10BD     		pop	{r4, pc}
+ 503              	.L42:
+ 504              		.align	2
+ 505              	.L41:
+ 506 0018 00000000 		.word	camera_drv
+ 507 001c 00000000 		.word	CameraHwAddress
+ 508              		.cfi_endproc
+ 509              	.LFE150:
+ 511              		.section	.text.BSP_CAMERA_BlackWhiteConfig,"ax",%progbits
+ 512              		.align	1
+ 513              		.global	BSP_CAMERA_BlackWhiteConfig
+ 514              		.syntax unified
+ 515              		.thumb
+ 516              		.thumb_func
+ 518              	BSP_CAMERA_BlackWhiteConfig:
+ 519              	.LVL36:
+ 520              	.LFB151:
+ 357:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(camera_drv->Config != NULL)
+ 521              		.loc 1 357 1 is_stmt 1 view -0
+ 522              		.cfi_startproc
+ 523              		@ args = 0, pretend = 0, frame = 0
+ 524              		@ frame_needed = 0, uses_anonymous_args = 0
+ 357:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(camera_drv->Config != NULL)
+ 525              		.loc 1 357 1 is_stmt 0 view .LVU98
+ 526 0000 10B5     		push	{r4, lr}
+ 527              	.LCFI12:
+ 528              		.cfi_def_cfa_offset 8
+ 529              		.cfi_offset 4, -8
+ 530              		.cfi_offset 14, -4
+ 358:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 531              		.loc 1 358 3 is_stmt 1 view .LVU99
+ 358:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 532              		.loc 1 358 16 is_stmt 0 view .LVU100
+ 533 0002 054B     		ldr	r3, .L46
+ 534 0004 1B68     		ldr	r3, [r3]
+ 535 0006 9C68     		ldr	r4, [r3, #8]
+ 358:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 536              		.loc 1 358 5 view .LVU101
+ 537 0008 2CB1     		cbz	r4, .L43
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 19
+
+
+ 538 000a 0246     		mov	r2, r0
+ 360:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }  
+ 539              		.loc 1 360 5 is_stmt 1 view .LVU102
+ 540 000c 0023     		movs	r3, #0
+ 541 000e 0121     		movs	r1, #1
+ 542 0010 0248     		ldr	r0, .L46+4
+ 543              	.LVL37:
+ 360:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }  
+ 544              		.loc 1 360 5 is_stmt 0 view .LVU103
+ 545 0012 0088     		ldrh	r0, [r0]
+ 546 0014 A047     		blx	r4
+ 547              	.LVL38:
+ 548              	.L43:
+ 362:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 549              		.loc 1 362 1 view .LVU104
+ 550 0016 10BD     		pop	{r4, pc}
+ 551              	.L47:
+ 552              		.align	2
+ 553              	.L46:
+ 554 0018 00000000 		.word	camera_drv
+ 555 001c 00000000 		.word	CameraHwAddress
+ 556              		.cfi_endproc
+ 557              	.LFE151:
+ 559              		.section	.text.BSP_CAMERA_ColorEffectConfig,"ax",%progbits
+ 560              		.align	1
+ 561              		.global	BSP_CAMERA_ColorEffectConfig
+ 562              		.syntax unified
+ 563              		.thumb
+ 564              		.thumb_func
+ 566              	BSP_CAMERA_ColorEffectConfig:
+ 567              	.LVL39:
+ 568              	.LFB152:
+ 375:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(camera_drv->Config != NULL)
+ 569              		.loc 1 375 1 is_stmt 1 view -0
+ 570              		.cfi_startproc
+ 571              		@ args = 0, pretend = 0, frame = 0
+ 572              		@ frame_needed = 0, uses_anonymous_args = 0
+ 375:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   if(camera_drv->Config != NULL)
+ 573              		.loc 1 375 1 is_stmt 0 view .LVU106
+ 574 0000 10B5     		push	{r4, lr}
+ 575              	.LCFI13:
+ 576              		.cfi_def_cfa_offset 8
+ 577              		.cfi_offset 4, -8
+ 578              		.cfi_offset 14, -4
+ 376:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 579              		.loc 1 376 3 is_stmt 1 view .LVU107
+ 376:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 580              		.loc 1 376 16 is_stmt 0 view .LVU108
+ 581 0002 054B     		ldr	r3, .L51
+ 582 0004 1B68     		ldr	r3, [r3]
+ 583 0006 9C68     		ldr	r4, [r3, #8]
+ 376:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 584              		.loc 1 376 5 view .LVU109
+ 585 0008 2CB1     		cbz	r4, .L48
+ 586 000a 0246     		mov	r2, r0
+ 378:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }  
+ 587              		.loc 1 378 5 is_stmt 1 view .LVU110
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 20
+
+
+ 588 000c 0023     		movs	r3, #0
+ 589 000e 0321     		movs	r1, #3
+ 590 0010 0248     		ldr	r0, .L51+4
+ 591              	.LVL40:
+ 378:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }  
+ 592              		.loc 1 378 5 is_stmt 0 view .LVU111
+ 593 0012 0088     		ldrh	r0, [r0]
+ 594 0014 A047     		blx	r4
+ 595              	.LVL41:
+ 596              	.L48:
+ 380:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 597              		.loc 1 380 1 view .LVU112
+ 598 0016 10BD     		pop	{r4, pc}
+ 599              	.L52:
+ 600              		.align	2
+ 601              	.L51:
+ 602 0018 00000000 		.word	camera_drv
+ 603 001c 00000000 		.word	CameraHwAddress
+ 604              		.cfi_endproc
+ 605              	.LFE152:
+ 607              		.section	.text.BSP_CAMERA_MspInit,"ax",%progbits
+ 608              		.align	1
+ 609              		.weak	BSP_CAMERA_MspInit
+ 610              		.syntax unified
+ 611              		.thumb
+ 612              		.thumb_func
+ 614              	BSP_CAMERA_MspInit:
+ 615              	.LVL42:
+ 616              	.LFB154:
+ 422:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 423:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 424:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Initializes the DCMI MSP.
+ 425:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  hdcmi: HDMI handle 
+ 426:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  Params
+ 427:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 428:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 429:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** __weak void BSP_CAMERA_MspInit(DCMI_HandleTypeDef *hdcmi, void *Params)
+ 430:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 617              		.loc 1 430 1 is_stmt 1 view -0
+ 618              		.cfi_startproc
+ 619              		@ args = 0, pretend = 0, frame = 48
+ 620              		@ frame_needed = 0, uses_anonymous_args = 0
+ 621              		.loc 1 430 1 is_stmt 0 view .LVU114
+ 622 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 623              	.LCFI14:
+ 624              		.cfi_def_cfa_offset 24
+ 625              		.cfi_offset 4, -24
+ 626              		.cfi_offset 5, -20
+ 627              		.cfi_offset 6, -16
+ 628              		.cfi_offset 7, -12
+ 629              		.cfi_offset 8, -8
+ 630              		.cfi_offset 14, -4
+ 631 0004 8CB0     		sub	sp, sp, #48
+ 632              	.LCFI15:
+ 633              		.cfi_def_cfa_offset 72
+ 634 0006 0646     		mov	r6, r0
+ 431:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   static DMA_HandleTypeDef hdma_handler;
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 21
+
+
+ 635              		.loc 1 431 3 is_stmt 1 view .LVU115
+ 432:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 636              		.loc 1 432 3 view .LVU116
+ 433:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 434:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /*** Enable peripherals and GPIO clocks ***/
+ 435:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Enable DCMI clock */
+ 436:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_DCMI_CLK_ENABLE();
+ 637              		.loc 1 436 3 view .LVU117
+ 638              	.LBB4:
+ 639              		.loc 1 436 3 view .LVU118
+ 640              		.loc 1 436 3 view .LVU119
+ 641 0008 584B     		ldr	r3, .L55
+ 642 000a 5A6B     		ldr	r2, [r3, #52]
+ 643 000c 42F00102 		orr	r2, r2, #1
+ 644 0010 5A63     		str	r2, [r3, #52]
+ 645              		.loc 1 436 3 view .LVU120
+ 646 0012 5A6B     		ldr	r2, [r3, #52]
+ 647 0014 02F00102 		and	r2, r2, #1
+ 648 0018 0092     		str	r2, [sp]
+ 649              		.loc 1 436 3 view .LVU121
+ 650 001a 009A     		ldr	r2, [sp]
+ 651              	.LBE4:
+ 652              		.loc 1 436 3 view .LVU122
+ 437:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 438:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Enable DMA2 clock */
+ 439:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_DMA2_CLK_ENABLE();
+ 653              		.loc 1 439 3 view .LVU123
+ 654              	.LBB5:
+ 655              		.loc 1 439 3 view .LVU124
+ 656              		.loc 1 439 3 view .LVU125
+ 657 001c 1A6B     		ldr	r2, [r3, #48]
+ 658 001e 42F48002 		orr	r2, r2, #4194304
+ 659 0022 1A63     		str	r2, [r3, #48]
+ 660              		.loc 1 439 3 view .LVU126
+ 661 0024 1A6B     		ldr	r2, [r3, #48]
+ 662 0026 02F48002 		and	r2, r2, #4194304
+ 663 002a 0192     		str	r2, [sp, #4]
+ 664              		.loc 1 439 3 view .LVU127
+ 665 002c 019A     		ldr	r2, [sp, #4]
+ 666              	.LBE5:
+ 667              		.loc 1 439 3 view .LVU128
+ 440:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 441:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Enable GPIO clocks */
+ 442:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+ 668              		.loc 1 442 3 view .LVU129
+ 669              	.LBB6:
+ 670              		.loc 1 442 3 view .LVU130
+ 671              		.loc 1 442 3 view .LVU131
+ 672 002e 1A6B     		ldr	r2, [r3, #48]
+ 673 0030 42F00102 		orr	r2, r2, #1
+ 674 0034 1A63     		str	r2, [r3, #48]
+ 675              		.loc 1 442 3 view .LVU132
+ 676 0036 1A6B     		ldr	r2, [r3, #48]
+ 677 0038 02F00102 		and	r2, r2, #1
+ 678 003c 0292     		str	r2, [sp, #8]
+ 679              		.loc 1 442 3 view .LVU133
+ 680 003e 029A     		ldr	r2, [sp, #8]
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 22
+
+
+ 681              	.LBE6:
+ 682              		.loc 1 442 3 view .LVU134
+ 443:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_GPIOD_CLK_ENABLE();
+ 683              		.loc 1 443 3 view .LVU135
+ 684              	.LBB7:
+ 685              		.loc 1 443 3 view .LVU136
+ 686              		.loc 1 443 3 view .LVU137
+ 687 0040 1A6B     		ldr	r2, [r3, #48]
+ 688 0042 42F00802 		orr	r2, r2, #8
+ 689 0046 1A63     		str	r2, [r3, #48]
+ 690              		.loc 1 443 3 view .LVU138
+ 691 0048 1A6B     		ldr	r2, [r3, #48]
+ 692 004a 02F00802 		and	r2, r2, #8
+ 693 004e 0392     		str	r2, [sp, #12]
+ 694              		.loc 1 443 3 view .LVU139
+ 695 0050 039A     		ldr	r2, [sp, #12]
+ 696              	.LBE7:
+ 697              		.loc 1 443 3 view .LVU140
+ 444:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_GPIOE_CLK_ENABLE();
+ 698              		.loc 1 444 3 view .LVU141
+ 699              	.LBB8:
+ 700              		.loc 1 444 3 view .LVU142
+ 701              		.loc 1 444 3 view .LVU143
+ 702 0052 1A6B     		ldr	r2, [r3, #48]
+ 703 0054 42F01002 		orr	r2, r2, #16
+ 704 0058 1A63     		str	r2, [r3, #48]
+ 705              		.loc 1 444 3 view .LVU144
+ 706 005a 1A6B     		ldr	r2, [r3, #48]
+ 707 005c 02F01002 		and	r2, r2, #16
+ 708 0060 0492     		str	r2, [sp, #16]
+ 709              		.loc 1 444 3 view .LVU145
+ 710 0062 049A     		ldr	r2, [sp, #16]
+ 711              	.LBE8:
+ 712              		.loc 1 444 3 view .LVU146
+ 445:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_GPIOG_CLK_ENABLE();
+ 713              		.loc 1 445 3 view .LVU147
+ 714              	.LBB9:
+ 715              		.loc 1 445 3 view .LVU148
+ 716              		.loc 1 445 3 view .LVU149
+ 717 0064 1A6B     		ldr	r2, [r3, #48]
+ 718 0066 42F04002 		orr	r2, r2, #64
+ 719 006a 1A63     		str	r2, [r3, #48]
+ 720              		.loc 1 445 3 view .LVU150
+ 721 006c 1A6B     		ldr	r2, [r3, #48]
+ 722 006e 02F04002 		and	r2, r2, #64
+ 723 0072 0592     		str	r2, [sp, #20]
+ 724              		.loc 1 445 3 view .LVU151
+ 725 0074 059A     		ldr	r2, [sp, #20]
+ 726              	.LBE9:
+ 727              		.loc 1 445 3 view .LVU152
+ 446:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_GPIOH_CLK_ENABLE();
+ 728              		.loc 1 446 3 view .LVU153
+ 729              	.LBB10:
+ 730              		.loc 1 446 3 view .LVU154
+ 731              		.loc 1 446 3 view .LVU155
+ 732 0076 1A6B     		ldr	r2, [r3, #48]
+ 733 0078 42F08002 		orr	r2, r2, #128
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 23
+
+
+ 734 007c 1A63     		str	r2, [r3, #48]
+ 735              		.loc 1 446 3 view .LVU156
+ 736 007e 1B6B     		ldr	r3, [r3, #48]
+ 737 0080 03F08003 		and	r3, r3, #128
+ 738 0084 0693     		str	r3, [sp, #24]
+ 739              		.loc 1 446 3 view .LVU157
+ 740 0086 069B     		ldr	r3, [sp, #24]
+ 741              	.LBE10:
+ 742              		.loc 1 446 3 view .LVU158
+ 447:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 448:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /*** Configure the GPIO ***/
+ 449:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Configure DCMI GPIO as alternate function */
+ 450:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pin       = GPIO_PIN_4 | GPIO_PIN_6;
+ 743              		.loc 1 450 3 view .LVU159
+ 744              		.loc 1 450 33 is_stmt 0 view .LVU160
+ 745 0088 5023     		movs	r3, #80
+ 746 008a 0793     		str	r3, [sp, #28]
+ 451:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+ 747              		.loc 1 451 3 is_stmt 1 view .LVU161
+ 748              		.loc 1 451 33 is_stmt 0 view .LVU162
+ 749 008c 4FF00208 		mov	r8, #2
+ 750 0090 CDF82080 		str	r8, [sp, #32]
+ 452:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_PULLUP;
+ 751              		.loc 1 452 3 is_stmt 1 view .LVU163
+ 752              		.loc 1 452 33 is_stmt 0 view .LVU164
+ 753 0094 0127     		movs	r7, #1
+ 754 0096 0997     		str	r7, [sp, #36]
+ 453:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 755              		.loc 1 453 3 is_stmt 1 view .LVU165
+ 756              		.loc 1 453 33 is_stmt 0 view .LVU166
+ 757 0098 0325     		movs	r5, #3
+ 758 009a 0A95     		str	r5, [sp, #40]
+ 454:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Alternate = GPIO_AF13_DCMI;
+ 759              		.loc 1 454 3 is_stmt 1 view .LVU167
+ 760              		.loc 1 454 33 is_stmt 0 view .LVU168
+ 761 009c 0D24     		movs	r4, #13
+ 762 009e 0B94     		str	r4, [sp, #44]
+ 455:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOA, &gpio_init_structure);
+ 763              		.loc 1 455 3 is_stmt 1 view .LVU169
+ 764 00a0 07A9     		add	r1, sp, #28
+ 765              	.LVL43:
+ 766              		.loc 1 455 3 is_stmt 0 view .LVU170
+ 767 00a2 3348     		ldr	r0, .L55+4
+ 768              	.LVL44:
+ 769              		.loc 1 455 3 view .LVU171
+ 770 00a4 FFF7FEFF 		bl	HAL_GPIO_Init
+ 771              	.LVL45:
+ 456:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 457:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pin       = GPIO_PIN_3;
+ 772              		.loc 1 457 3 is_stmt 1 view .LVU172
+ 773              		.loc 1 457 33 is_stmt 0 view .LVU173
+ 774 00a8 0823     		movs	r3, #8
+ 775 00aa 0793     		str	r3, [sp, #28]
+ 458:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+ 776              		.loc 1 458 3 is_stmt 1 view .LVU174
+ 777              		.loc 1 458 33 is_stmt 0 view .LVU175
+ 778 00ac CDF82080 		str	r8, [sp, #32]
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 24
+
+
+ 459:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_PULLUP;
+ 779              		.loc 1 459 3 is_stmt 1 view .LVU176
+ 780              		.loc 1 459 33 is_stmt 0 view .LVU177
+ 781 00b0 0997     		str	r7, [sp, #36]
+ 460:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 782              		.loc 1 460 3 is_stmt 1 view .LVU178
+ 783              		.loc 1 460 33 is_stmt 0 view .LVU179
+ 784 00b2 0A95     		str	r5, [sp, #40]
+ 461:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Alternate = GPIO_AF13_DCMI;
+ 785              		.loc 1 461 3 is_stmt 1 view .LVU180
+ 786              		.loc 1 461 33 is_stmt 0 view .LVU181
+ 787 00b4 0B94     		str	r4, [sp, #44]
+ 462:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOD, &gpio_init_structure);
+ 788              		.loc 1 462 3 is_stmt 1 view .LVU182
+ 789 00b6 07A9     		add	r1, sp, #28
+ 790 00b8 2E48     		ldr	r0, .L55+8
+ 791 00ba FFF7FEFF 		bl	HAL_GPIO_Init
+ 792              	.LVL46:
+ 463:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 464:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pin       = GPIO_PIN_5 | GPIO_PIN_6;
+ 793              		.loc 1 464 3 view .LVU183
+ 794              		.loc 1 464 33 is_stmt 0 view .LVU184
+ 795 00be 6023     		movs	r3, #96
+ 796 00c0 0793     		str	r3, [sp, #28]
+ 465:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+ 797              		.loc 1 465 3 is_stmt 1 view .LVU185
+ 798              		.loc 1 465 33 is_stmt 0 view .LVU186
+ 799 00c2 CDF82080 		str	r8, [sp, #32]
+ 466:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_PULLUP;
+ 800              		.loc 1 466 3 is_stmt 1 view .LVU187
+ 801              		.loc 1 466 33 is_stmt 0 view .LVU188
+ 802 00c6 0997     		str	r7, [sp, #36]
+ 467:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 803              		.loc 1 467 3 is_stmt 1 view .LVU189
+ 804              		.loc 1 467 33 is_stmt 0 view .LVU190
+ 805 00c8 0A95     		str	r5, [sp, #40]
+ 468:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Alternate = GPIO_AF13_DCMI;
+ 806              		.loc 1 468 3 is_stmt 1 view .LVU191
+ 807              		.loc 1 468 33 is_stmt 0 view .LVU192
+ 808 00ca 0B94     		str	r4, [sp, #44]
+ 469:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOE, &gpio_init_structure);
+ 809              		.loc 1 469 3 is_stmt 1 view .LVU193
+ 810 00cc 07A9     		add	r1, sp, #28
+ 811 00ce 2A48     		ldr	r0, .L55+12
+ 812 00d0 FFF7FEFF 		bl	HAL_GPIO_Init
+ 813              	.LVL47:
+ 470:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 471:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pin       = GPIO_PIN_9;
+ 814              		.loc 1 471 3 view .LVU194
+ 815              		.loc 1 471 33 is_stmt 0 view .LVU195
+ 816 00d4 4FF40073 		mov	r3, #512
+ 817 00d8 0793     		str	r3, [sp, #28]
+ 472:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+ 818              		.loc 1 472 3 is_stmt 1 view .LVU196
+ 819              		.loc 1 472 33 is_stmt 0 view .LVU197
+ 820 00da CDF82080 		str	r8, [sp, #32]
+ 473:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_PULLUP;
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 25
+
+
+ 821              		.loc 1 473 3 is_stmt 1 view .LVU198
+ 822              		.loc 1 473 33 is_stmt 0 view .LVU199
+ 823 00de 0997     		str	r7, [sp, #36]
+ 474:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 824              		.loc 1 474 3 is_stmt 1 view .LVU200
+ 825              		.loc 1 474 33 is_stmt 0 view .LVU201
+ 826 00e0 0A95     		str	r5, [sp, #40]
+ 475:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Alternate = GPIO_AF13_DCMI;
+ 827              		.loc 1 475 3 is_stmt 1 view .LVU202
+ 828              		.loc 1 475 33 is_stmt 0 view .LVU203
+ 829 00e2 0B94     		str	r4, [sp, #44]
+ 476:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOG, &gpio_init_structure);
+ 830              		.loc 1 476 3 is_stmt 1 view .LVU204
+ 831 00e4 07A9     		add	r1, sp, #28
+ 832 00e6 2548     		ldr	r0, .L55+16
+ 833 00e8 FFF7FEFF 		bl	HAL_GPIO_Init
+ 834              	.LVL48:
+ 477:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 478:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pin       = GPIO_PIN_9 | GPIO_PIN_10  | GPIO_PIN_11  |\
+ 835              		.loc 1 478 3 view .LVU205
+ 836              		.loc 1 478 33 is_stmt 0 view .LVU206
+ 837 00ec 4FF4BC43 		mov	r3, #24064
+ 838 00f0 0793     		str	r3, [sp, #28]
+ 479:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****                                   GPIO_PIN_12 | GPIO_PIN_14;
+ 480:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+ 839              		.loc 1 480 3 is_stmt 1 view .LVU207
+ 840              		.loc 1 480 33 is_stmt 0 view .LVU208
+ 841 00f2 CDF82080 		str	r8, [sp, #32]
+ 481:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Pull      = GPIO_PULLUP;
+ 842              		.loc 1 481 3 is_stmt 1 view .LVU209
+ 843              		.loc 1 481 33 is_stmt 0 view .LVU210
+ 844 00f6 0997     		str	r7, [sp, #36]
+ 482:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+ 845              		.loc 1 482 3 is_stmt 1 view .LVU211
+ 846              		.loc 1 482 33 is_stmt 0 view .LVU212
+ 847 00f8 0A95     		str	r5, [sp, #40]
+ 483:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   gpio_init_structure.Alternate = GPIO_AF13_DCMI;
+ 848              		.loc 1 483 3 is_stmt 1 view .LVU213
+ 849              		.loc 1 483 33 is_stmt 0 view .LVU214
+ 850 00fa 0B94     		str	r4, [sp, #44]
+ 484:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure);
+ 851              		.loc 1 484 3 is_stmt 1 view .LVU215
+ 852 00fc 07A9     		add	r1, sp, #28
+ 853 00fe 2048     		ldr	r0, .L55+20
+ 854 0100 FFF7FEFF 		bl	HAL_GPIO_Init
+ 855              	.LVL49:
+ 485:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 486:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /*** Configure the DMA ***/
+ 487:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Set the parameters to be configured */
+ 488:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.Channel             = DMA_CHANNEL_1;
+ 856              		.loc 1 488 3 view .LVU216
+ 857              		.loc 1 488 41 is_stmt 0 view .LVU217
+ 858 0104 1F4B     		ldr	r3, .L55+24
+ 859 0106 4FF00072 		mov	r2, #33554432
+ 860 010a 5A60     		str	r2, [r3, #4]
+ 489:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.Direction           = DMA_PERIPH_TO_MEMORY;
+ 861              		.loc 1 489 3 is_stmt 1 view .LVU218
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 26
+
+
+ 862              		.loc 1 489 41 is_stmt 0 view .LVU219
+ 863 010c 0024     		movs	r4, #0
+ 864 010e 9C60     		str	r4, [r3, #8]
+ 490:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.PeriphInc           = DMA_PINC_DISABLE;
+ 865              		.loc 1 490 3 is_stmt 1 view .LVU220
+ 866              		.loc 1 490 41 is_stmt 0 view .LVU221
+ 867 0110 DC60     		str	r4, [r3, #12]
+ 491:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.MemInc              = DMA_MINC_ENABLE;
+ 868              		.loc 1 491 3 is_stmt 1 view .LVU222
+ 869              		.loc 1 491 41 is_stmt 0 view .LVU223
+ 870 0112 4FF48062 		mov	r2, #1024
+ 871 0116 1A61     		str	r2, [r3, #16]
+ 492:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+ 872              		.loc 1 492 3 is_stmt 1 view .LVU224
+ 873              		.loc 1 492 41 is_stmt 0 view .LVU225
+ 874 0118 4FF48052 		mov	r2, #4096
+ 875 011c 5A61     		str	r2, [r3, #20]
+ 493:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
+ 876              		.loc 1 493 3 is_stmt 1 view .LVU226
+ 877              		.loc 1 493 41 is_stmt 0 view .LVU227
+ 878 011e 4FF48042 		mov	r2, #16384
+ 879 0122 9A61     		str	r2, [r3, #24]
+ 494:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.Mode                = DMA_CIRCULAR;
+ 880              		.loc 1 494 3 is_stmt 1 view .LVU228
+ 881              		.loc 1 494 41 is_stmt 0 view .LVU229
+ 882 0124 4FF48072 		mov	r2, #256
+ 883 0128 DA61     		str	r2, [r3, #28]
+ 495:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.Priority            = DMA_PRIORITY_HIGH;
+ 884              		.loc 1 495 3 is_stmt 1 view .LVU230
+ 885              		.loc 1 495 41 is_stmt 0 view .LVU231
+ 886 012a 4FF40032 		mov	r2, #131072
+ 887 012e 1A62     		str	r2, [r3, #32]
+ 496:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
+ 888              		.loc 1 496 3 is_stmt 1 view .LVU232
+ 889              		.loc 1 496 41 is_stmt 0 view .LVU233
+ 890 0130 5C62     		str	r4, [r3, #36]
+ 497:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
+ 891              		.loc 1 497 3 is_stmt 1 view .LVU234
+ 892              		.loc 1 497 41 is_stmt 0 view .LVU235
+ 893 0132 9D62     		str	r5, [r3, #40]
+ 498:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.MemBurst            = DMA_MBURST_SINGLE;
+ 894              		.loc 1 498 3 is_stmt 1 view .LVU236
+ 895              		.loc 1 498 41 is_stmt 0 view .LVU237
+ 896 0134 DC62     		str	r4, [r3, #44]
+ 499:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Init.PeriphBurst         = DMA_PBURST_SINGLE; 
+ 897              		.loc 1 499 3 is_stmt 1 view .LVU238
+ 898              		.loc 1 499 41 is_stmt 0 view .LVU239
+ 899 0136 1C63     		str	r4, [r3, #48]
+ 500:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 501:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hdma_handler.Instance = DMA2_Stream1;
+ 900              		.loc 1 501 3 is_stmt 1 view .LVU240
+ 901              		.loc 1 501 25 is_stmt 0 view .LVU241
+ 902 0138 134A     		ldr	r2, .L55+28
+ 903 013a 1A60     		str	r2, [r3]
+ 502:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 503:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Associate the initialized DMA handle to the DCMI handle */
+ 504:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_LINKDMA(hdcmi, DMA_Handle, hdma_handler);
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 27
+
+
+ 904              		.loc 1 504 3 is_stmt 1 view .LVU242
+ 905              		.loc 1 504 3 view .LVU243
+ 906 013c B364     		str	r3, [r6, #72]
+ 907              		.loc 1 504 3 view .LVU244
+ 908 013e 9E63     		str	r6, [r3, #56]
+ 909              		.loc 1 504 3 view .LVU245
+ 505:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 506:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /*** Configure the NVIC for DCMI and DMA ***/
+ 507:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* NVIC configuration for DCMI transfer complete interrupt */
+ 508:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_NVIC_SetPriority(DCMI_IRQn, 0x0F, 0);
+ 910              		.loc 1 508 3 view .LVU246
+ 911 0140 2246     		mov	r2, r4
+ 912 0142 0F21     		movs	r1, #15
+ 913 0144 4E20     		movs	r0, #78
+ 914 0146 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 915              	.LVL50:
+ 509:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_NVIC_EnableIRQ(DCMI_IRQn);  
+ 916              		.loc 1 509 3 view .LVU247
+ 917 014a 4E20     		movs	r0, #78
+ 918 014c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 919              	.LVL51:
+ 510:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 511:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* NVIC configuration for DMA2D transfer complete interrupt */
+ 512:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 0x0F, 0);
+ 920              		.loc 1 512 3 view .LVU248
+ 921 0150 2246     		mov	r2, r4
+ 922 0152 0F21     		movs	r1, #15
+ 923 0154 3920     		movs	r0, #57
+ 924 0156 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 925              	.LVL52:
+ 513:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
+ 926              		.loc 1 513 3 view .LVU249
+ 927 015a 3920     		movs	r0, #57
+ 928 015c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 929              	.LVL53:
+ 514:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 515:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Configure the DMA stream */
+ 516:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_DMA_Init(hdcmi->DMA_Handle);  
+ 930              		.loc 1 516 3 view .LVU250
+ 931 0160 B06C     		ldr	r0, [r6, #72]
+ 932 0162 FFF7FEFF 		bl	HAL_DMA_Init
+ 933              	.LVL54:
+ 517:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 934              		.loc 1 517 1 is_stmt 0 view .LVU251
+ 935 0166 0CB0     		add	sp, sp, #48
+ 936              	.LCFI16:
+ 937              		.cfi_def_cfa_offset 24
+ 938              		@ sp needed
+ 939 0168 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 940              	.LVL55:
+ 941              	.L56:
+ 942              		.loc 1 517 1 view .LVU252
+ 943              		.align	2
+ 944              	.L55:
+ 945 016c 00380240 		.word	1073887232
+ 946 0170 00000240 		.word	1073872896
+ 947 0174 000C0240 		.word	1073875968
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 28
+
+
+ 948 0178 00100240 		.word	1073876992
+ 949 017c 00180240 		.word	1073879040
+ 950 0180 001C0240 		.word	1073880064
+ 951 0184 00000000 		.word	hdma_handler.0
+ 952 0188 28640240 		.word	1073898536
+ 953              		.cfi_endproc
+ 954              	.LFE154:
+ 956              		.section	.text.BSP_CAMERA_Init,"ax",%progbits
+ 957              		.align	1
+ 958              		.global	BSP_CAMERA_Init
+ 959              		.syntax unified
+ 960              		.thumb
+ 961              		.thumb_func
+ 963              	BSP_CAMERA_Init:
+ 964              	.LVL56:
+ 965              	.LFB141:
+ 134:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   DCMI_HandleTypeDef *phdcmi;
+ 966              		.loc 1 134 1 is_stmt 1 view -0
+ 967              		.cfi_startproc
+ 968              		@ args = 0, pretend = 0, frame = 0
+ 969              		@ frame_needed = 0, uses_anonymous_args = 0
+ 134:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   DCMI_HandleTypeDef *phdcmi;
+ 970              		.loc 1 134 1 is_stmt 0 view .LVU254
+ 971 0000 30B5     		push	{r4, r5, lr}
+ 972              	.LCFI17:
+ 973              		.cfi_def_cfa_offset 12
+ 974              		.cfi_offset 4, -12
+ 975              		.cfi_offset 5, -8
+ 976              		.cfi_offset 14, -4
+ 977 0002 83B0     		sub	sp, sp, #12
+ 978              	.LCFI18:
+ 979              		.cfi_def_cfa_offset 24
+ 980 0004 0446     		mov	r4, r0
+ 135:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   uint8_t status = CAMERA_ERROR;
+ 981              		.loc 1 135 3 is_stmt 1 view .LVU255
+ 136:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 982              		.loc 1 136 3 view .LVU256
+ 983              	.LVL57:
+ 139:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 984              		.loc 1 139 3 view .LVU257
+ 143:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.HSPolarity       = DCMI_HSPOLARITY_LOW;
+ 985              		.loc 1 143 3 view .LVU258
+ 143:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.HSPolarity       = DCMI_HSPOLARITY_LOW;
+ 986              		.loc 1 143 33 is_stmt 0 view .LVU259
+ 987 0006 244B     		ldr	r3, .L65
+ 988 0008 0022     		movs	r2, #0
+ 989 000a 5A61     		str	r2, [r3, #20]
+ 144:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.SynchroMode      = DCMI_SYNCHRO_HARDWARE;
+ 990              		.loc 1 144 3 is_stmt 1 view .LVU260
+ 144:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.SynchroMode      = DCMI_SYNCHRO_HARDWARE;
+ 991              		.loc 1 144 33 is_stmt 0 view .LVU261
+ 992 000c 1A61     		str	r2, [r3, #16]
+ 145:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.VSPolarity       = DCMI_VSPOLARITY_HIGH;
+ 993              		.loc 1 145 3 is_stmt 1 view .LVU262
+ 145:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.VSPolarity       = DCMI_VSPOLARITY_HIGH;
+ 994              		.loc 1 145 33 is_stmt 0 view .LVU263
+ 995 000e 5A60     		str	r2, [r3, #4]
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 29
+
+
+ 146:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.ExtendedDataMode = DCMI_EXTEND_DATA_8B;
+ 996              		.loc 1 146 3 is_stmt 1 view .LVU264
+ 146:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.ExtendedDataMode = DCMI_EXTEND_DATA_8B;
+ 997              		.loc 1 146 33 is_stmt 0 view .LVU265
+ 998 0010 8021     		movs	r1, #128
+ 999 0012 D960     		str	r1, [r3, #12]
+ 147:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.PCKPolarity      = DCMI_PCKPOLARITY_RISING;
+ 1000              		.loc 1 147 3 is_stmt 1 view .LVU266
+ 147:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Init.PCKPolarity      = DCMI_PCKPOLARITY_RISING;
+ 1001              		.loc 1 147 33 is_stmt 0 view .LVU267
+ 1002 0014 9A61     		str	r2, [r3, #24]
+ 148:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Instance              = DCMI;
+ 1003              		.loc 1 148 3 is_stmt 1 view .LVU268
+ 148:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   phdcmi->Instance              = DCMI;
+ 1004              		.loc 1 148 33 is_stmt 0 view .LVU269
+ 1005 0016 2022     		movs	r2, #32
+ 1006 0018 9A60     		str	r2, [r3, #8]
+ 149:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1007              		.loc 1 149 3 is_stmt 1 view .LVU270
+ 149:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1008              		.loc 1 149 33 is_stmt 0 view .LVU271
+ 1009 001a 204A     		ldr	r2, .L65+4
+ 1010 001c 1A60     		str	r2, [r3]
+ 152:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1011              		.loc 1 152 3 is_stmt 1 view .LVU272
+ 1012 001e FFF7FEFF 		bl	BSP_CAMERA_PwrUp
+ 1013              	.LVL58:
+ 155:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 1014              		.loc 1 155 3 view .LVU273
+ 155:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 1015              		.loc 1 155 6 is_stmt 0 view .LVU274
+ 1016 0022 6020     		movs	r0, #96
+ 1017 0024 FFF7FEFF 		bl	ov9655_ReadID
+ 1018              	.LVL59:
+ 155:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   {
+ 1019              		.loc 1 155 5 discriminator 1 view .LVU275
+ 1020 0028 9628     		cmp	r0, #150
+ 1021 002a 02D0     		beq	.L63
+ 192:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }
+ 1022              		.loc 1 192 12 view .LVU276
+ 1023 002c 0420     		movs	r0, #4
+ 1024              	.LVL60:
+ 1025              	.L58:
+ 195:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1026              		.loc 1 195 3 is_stmt 1 view .LVU277
+ 196:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1027              		.loc 1 196 1 is_stmt 0 view .LVU278
+ 1028 002e 03B0     		add	sp, sp, #12
+ 1029              	.LCFI19:
+ 1030              		.cfi_remember_state
+ 1031              		.cfi_def_cfa_offset 12
+ 1032              		@ sp needed
+ 1033 0030 30BD     		pop	{r4, r5, pc}
+ 1034              	.LVL61:
+ 1035              	.L63:
+ 1036              	.LCFI20:
+ 1037              		.cfi_restore_state
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 30
+
+
+ 158:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     CameraHwAddress = CAMERA_I2C_ADDRESS;
+ 1038              		.loc 1 158 5 is_stmt 1 view .LVU279
+ 158:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     CameraHwAddress = CAMERA_I2C_ADDRESS;
+ 1039              		.loc 1 158 16 is_stmt 0 view .LVU280
+ 1040 0032 1B4B     		ldr	r3, .L65+8
+ 1041 0034 1B4A     		ldr	r2, .L65+12
+ 1042 0036 1A60     		str	r2, [r3]
+ 159:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1043              		.loc 1 159 5 is_stmt 1 view .LVU281
+ 159:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1044              		.loc 1 159 21 is_stmt 0 view .LVU282
+ 1045 0038 1B4B     		ldr	r3, .L65+16
+ 1046 003a 6022     		movs	r2, #96
+ 1047 003c 1A60     		str	r2, [r3]
+ 162:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     HAL_DCMI_Init(phdcmi);
+ 1048              		.loc 1 162 5 is_stmt 1 view .LVU283
+ 1049 003e 164D     		ldr	r5, .L65
+ 1050 0040 0021     		movs	r1, #0
+ 1051 0042 2846     		mov	r0, r5
+ 1052 0044 FFF7FEFF 		bl	BSP_CAMERA_MspInit
+ 1053              	.LVL62:
+ 163:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1054              		.loc 1 163 5 view .LVU284
+ 1055 0048 2846     		mov	r0, r5
+ 1056 004a FFF7FEFF 		bl	HAL_DCMI_Init
+ 1057              	.LVL63:
+ 166:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     {     /* For 480x272 resolution, the OV9655 sensor is set to VGA resolution
+ 1058              		.loc 1 166 5 view .LVU285
+ 166:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     {     /* For 480x272 resolution, the OV9655 sensor is set to VGA resolution
+ 1059              		.loc 1 166 8 is_stmt 0 view .LVU286
+ 1060 004e 022C     		cmp	r4, #2
+ 1061 0050 0DD0     		beq	.L64
+ 180:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       HAL_DCMI_DisableCROP(phdcmi);
+ 1062              		.loc 1 180 7 is_stmt 1 view .LVU287
+ 180:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       HAL_DCMI_DisableCROP(phdcmi);
+ 1063              		.loc 1 180 17 is_stmt 0 view .LVU288
+ 1064 0052 134B     		ldr	r3, .L65+8
+ 1065 0054 1B68     		ldr	r3, [r3]
+ 1066 0056 1B68     		ldr	r3, [r3]
+ 180:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       HAL_DCMI_DisableCROP(phdcmi);
+ 1067              		.loc 1 180 7 view .LVU289
+ 1068 0058 2146     		mov	r1, r4
+ 1069 005a 134A     		ldr	r2, .L65+16
+ 1070 005c 1088     		ldrh	r0, [r2]
+ 1071 005e 9847     		blx	r3
+ 1072              	.LVL64:
+ 181:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+ 1073              		.loc 1 181 7 is_stmt 1 view .LVU290
+ 1074 0060 0D48     		ldr	r0, .L65
+ 1075 0062 FFF7FEFF 		bl	HAL_DCMI_DisableCrop
+ 1076              	.LVL65:
+ 1077              	.L60:
+ 184:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1078              		.loc 1 184 5 view .LVU291
+ 184:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1079              		.loc 1 184 29 is_stmt 0 view .LVU292
+ 1080 0066 114B     		ldr	r3, .L65+20
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 31
+
+
+ 1081 0068 1C60     		str	r4, [r3]
+ 187:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }
+ 1082              		.loc 1 187 5 is_stmt 1 view .LVU293
+ 1083              	.LVL66:
+ 187:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   }
+ 1084              		.loc 1 187 12 is_stmt 0 view .LVU294
+ 1085 006a 0020     		movs	r0, #0
+ 1086 006c DFE7     		b	.L58
+ 1087              	.LVL67:
+ 1088              	.L64:
+ 170:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       HAL_DCMI_ConfigCROP(phdcmi,           /* Crop in the middle of the VGA picture */
+ 1089              		.loc 1 170 7 is_stmt 1 view .LVU295
+ 170:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       HAL_DCMI_ConfigCROP(phdcmi,           /* Crop in the middle of the VGA picture */
+ 1090              		.loc 1 170 17 is_stmt 0 view .LVU296
+ 1091 006e 0C4B     		ldr	r3, .L65+8
+ 1092 0070 1B68     		ldr	r3, [r3]
+ 1093 0072 1B68     		ldr	r3, [r3]
+ 170:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****       HAL_DCMI_ConfigCROP(phdcmi,           /* Crop in the middle of the VGA picture */
+ 1094              		.loc 1 170 7 view .LVU297
+ 1095 0074 0321     		movs	r1, #3
+ 1096 0076 0C4A     		ldr	r2, .L65+16
+ 1097 0078 1088     		ldrh	r0, [r2]
+ 1098 007a 9847     		blx	r3
+ 1099              	.LVL68:
+ 171:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****                          (CAMERA_VGA_RES_X - CAMERA_480x272_RES_X)/2,
+ 1100              		.loc 1 171 7 is_stmt 1 view .LVU298
+ 1101 007c 40F20F13 		movw	r3, #271
+ 1102 0080 0093     		str	r3, [sp]
+ 1103 0082 40F2BF33 		movw	r3, #959
+ 1104 0086 6822     		movs	r2, #104
+ 1105 0088 5021     		movs	r1, #80
+ 1106 008a 2846     		mov	r0, r5
+ 1107 008c FFF7FEFF 		bl	HAL_DCMI_ConfigCrop
+ 1108              	.LVL69:
+ 176:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****     }
+ 1109              		.loc 1 176 7 view .LVU299
+ 1110 0090 2846     		mov	r0, r5
+ 1111 0092 FFF7FEFF 		bl	HAL_DCMI_EnableCrop
+ 1112              	.LVL70:
+ 1113 0096 E6E7     		b	.L60
+ 1114              	.L66:
+ 1115              		.align	2
+ 1116              	.L65:
+ 1117 0098 00000000 		.word	hDcmiHandler
+ 1118 009c 00000550 		.word	1342504960
+ 1119 00a0 00000000 		.word	camera_drv
+ 1120 00a4 00000000 		.word	ov9655_drv
+ 1121 00a8 00000000 		.word	CameraHwAddress
+ 1122 00ac 00000000 		.word	CameraCurrentResolution
+ 1123              		.cfi_endproc
+ 1124              	.LFE141:
+ 1126              		.section	.text.BSP_CAMERA_MspDeInit,"ax",%progbits
+ 1127              		.align	1
+ 1128              		.weak	BSP_CAMERA_MspDeInit
+ 1129              		.syntax unified
+ 1130              		.thumb
+ 1131              		.thumb_func
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 32
+
+
+ 1133              	BSP_CAMERA_MspDeInit:
+ 1134              	.LVL71:
+ 1135              	.LFB155:
+ 518:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 519:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 520:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 521:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  DeInitializes the DCMI MSP.
+ 522:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  hdcmi: HDMI handle 
+ 523:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  Params
+ 524:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 525:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 526:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** __weak void BSP_CAMERA_MspDeInit(DCMI_HandleTypeDef *hdcmi, void *Params)
+ 527:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 1136              		.loc 1 527 1 view -0
+ 1137              		.cfi_startproc
+ 1138              		@ args = 0, pretend = 0, frame = 0
+ 1139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1140              		.loc 1 527 1 is_stmt 0 view .LVU301
+ 1141 0000 10B5     		push	{r4, lr}
+ 1142              	.LCFI21:
+ 1143              		.cfi_def_cfa_offset 8
+ 1144              		.cfi_offset 4, -8
+ 1145              		.cfi_offset 14, -4
+ 1146 0002 0446     		mov	r4, r0
+ 528:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Disable NVIC  for DCMI transfer complete interrupt */
+ 529:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_NVIC_DisableIRQ(DCMI_IRQn);  
+ 1147              		.loc 1 529 3 is_stmt 1 view .LVU302
+ 1148 0004 4E20     		movs	r0, #78
+ 1149              	.LVL72:
+ 1150              		.loc 1 529 3 is_stmt 0 view .LVU303
+ 1151 0006 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 1152              	.LVL73:
+ 530:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 531:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Disable NVIC for DMA2 transfer complete interrupt */
+ 532:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_NVIC_DisableIRQ(DMA2_Stream1_IRQn);
+ 1153              		.loc 1 532 3 is_stmt 1 view .LVU304
+ 1154 000a 3920     		movs	r0, #57
+ 1155 000c FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 1156              	.LVL74:
+ 533:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   
+ 534:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Configure the DMA stream */
+ 535:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   HAL_DMA_DeInit(hdcmi->DMA_Handle);  
+ 1157              		.loc 1 535 3 view .LVU305
+ 1158 0010 A06C     		ldr	r0, [r4, #72]
+ 1159 0012 FFF7FEFF 		bl	HAL_DMA_DeInit
+ 1160              	.LVL75:
+ 536:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 537:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* Disable DCMI clock */
+ 538:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   __HAL_RCC_DCMI_CLK_DISABLE();
+ 1161              		.loc 1 538 3 view .LVU306
+ 1162 0016 034A     		ldr	r2, .L69
+ 1163 0018 536B     		ldr	r3, [r2, #52]
+ 1164 001a 23F00103 		bic	r3, r3, #1
+ 1165 001e 5363     		str	r3, [r2, #52]
+ 539:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 540:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* GPIO pins clock and DMA clock can be shut down in the application 
+ 541:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****      by surcharging this __weak function */ 
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 33
+
+
+ 542:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1166              		.loc 1 542 1 is_stmt 0 view .LVU307
+ 1167 0020 10BD     		pop	{r4, pc}
+ 1168              	.LVL76:
+ 1169              	.L70:
+ 1170              		.loc 1 542 1 view .LVU308
+ 1171 0022 00BF     		.align	2
+ 1172              	.L69:
+ 1173 0024 00380240 		.word	1073887232
+ 1174              		.cfi_endproc
+ 1175              	.LFE155:
+ 1177              		.section	.text.BSP_CAMERA_DeInit,"ax",%progbits
+ 1178              		.align	1
+ 1179              		.global	BSP_CAMERA_DeInit
+ 1180              		.syntax unified
+ 1181              		.thumb
+ 1182              		.thumb_func
+ 1184              	BSP_CAMERA_DeInit:
+ 1185              	.LFB142:
+ 203:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   hDcmiHandler.Instance              = DCMI;
+ 1186              		.loc 1 203 1 is_stmt 1 view -0
+ 1187              		.cfi_startproc
+ 1188              		@ args = 0, pretend = 0, frame = 0
+ 1189              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1190 0000 10B5     		push	{r4, lr}
+ 1191              	.LCFI22:
+ 1192              		.cfi_def_cfa_offset 8
+ 1193              		.cfi_offset 4, -8
+ 1194              		.cfi_offset 14, -4
+ 204:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1195              		.loc 1 204 3 view .LVU310
+ 204:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1196              		.loc 1 204 38 is_stmt 0 view .LVU311
+ 1197 0002 064C     		ldr	r4, .L73
+ 1198 0004 064B     		ldr	r3, .L73+4
+ 1199 0006 2360     		str	r3, [r4]
+ 206:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_MspDeInit(&hDcmiHandler, NULL);
+ 1200              		.loc 1 206 3 is_stmt 1 view .LVU312
+ 1201 0008 2046     		mov	r0, r4
+ 1202 000a FFF7FEFF 		bl	HAL_DCMI_DeInit
+ 1203              	.LVL77:
+ 207:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   return CAMERA_OK;
+ 1204              		.loc 1 207 3 view .LVU313
+ 1205 000e 0021     		movs	r1, #0
+ 1206 0010 2046     		mov	r0, r4
+ 1207 0012 FFF7FEFF 		bl	BSP_CAMERA_MspDeInit
+ 1208              	.LVL78:
+ 208:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1209              		.loc 1 208 3 view .LVU314
+ 209:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1210              		.loc 1 209 1 is_stmt 0 view .LVU315
+ 1211 0016 0020     		movs	r0, #0
+ 1212 0018 10BD     		pop	{r4, pc}
+ 1213              	.L74:
+ 1214 001a 00BF     		.align	2
+ 1215              	.L73:
+ 1216 001c 00000000 		.word	hDcmiHandler
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 34
+
+
+ 1217 0020 00000550 		.word	1342504960
+ 1218              		.cfi_endproc
+ 1219              	.LFE142:
+ 1221              		.section	.text.BSP_CAMERA_LineEventCallback,"ax",%progbits
+ 1222              		.align	1
+ 1223              		.weak	BSP_CAMERA_LineEventCallback
+ 1224              		.syntax unified
+ 1225              		.thumb
+ 1226              		.thumb_func
+ 1228              	BSP_CAMERA_LineEventCallback:
+ 1229              	.LFB157:
+ 543:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 544:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 545:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Line event callback
+ 546:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  hdcmi: pointer to the DCMI handle  
+ 547:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 548:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 549:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void HAL_DCMI_LineEventCallback(DCMI_HandleTypeDef *hdcmi)
+ 550:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {        
+ 551:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_LineEventCallback();
+ 552:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 553:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 554:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 555:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Line Event callback.
+ 556:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 557:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 558:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** __weak void BSP_CAMERA_LineEventCallback(void)
+ 559:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 1230              		.loc 1 559 1 is_stmt 1 view -0
+ 1231              		.cfi_startproc
+ 1232              		@ args = 0, pretend = 0, frame = 0
+ 1233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1234              		@ link register save eliminated.
+ 560:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
+ 561:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****             the HAL_DCMI_LineEventCallback could be implemented in the user file
+ 562:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****    */
+ 563:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1235              		.loc 1 563 1 view .LVU317
+ 1236 0000 7047     		bx	lr
+ 1237              		.cfi_endproc
+ 1238              	.LFE157:
+ 1240              		.section	.text.HAL_DCMI_LineEventCallback,"ax",%progbits
+ 1241              		.align	1
+ 1242              		.global	HAL_DCMI_LineEventCallback
+ 1243              		.syntax unified
+ 1244              		.thumb
+ 1245              		.thumb_func
+ 1247              	HAL_DCMI_LineEventCallback:
+ 1248              	.LVL79:
+ 1249              	.LFB156:
+ 550:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_LineEventCallback();
+ 1250              		.loc 1 550 1 view -0
+ 1251              		.cfi_startproc
+ 1252              		@ args = 0, pretend = 0, frame = 0
+ 1253              		@ frame_needed = 0, uses_anonymous_args = 0
+ 550:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_LineEventCallback();
+ 1254              		.loc 1 550 1 is_stmt 0 view .LVU319
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 35
+
+
+ 1255 0000 08B5     		push	{r3, lr}
+ 1256              	.LCFI23:
+ 1257              		.cfi_def_cfa_offset 8
+ 1258              		.cfi_offset 3, -8
+ 1259              		.cfi_offset 14, -4
+ 551:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1260              		.loc 1 551 3 is_stmt 1 view .LVU320
+ 1261 0002 FFF7FEFF 		bl	BSP_CAMERA_LineEventCallback
+ 1262              	.LVL80:
+ 552:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1263              		.loc 1 552 1 is_stmt 0 view .LVU321
+ 1264 0006 08BD     		pop	{r3, pc}
+ 1265              		.cfi_endproc
+ 1266              	.LFE156:
+ 1268              		.section	.text.BSP_CAMERA_VsyncEventCallback,"ax",%progbits
+ 1269              		.align	1
+ 1270              		.weak	BSP_CAMERA_VsyncEventCallback
+ 1271              		.syntax unified
+ 1272              		.thumb
+ 1273              		.thumb_func
+ 1275              	BSP_CAMERA_VsyncEventCallback:
+ 1276              	.LFB159:
+ 564:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 565:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 566:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  VSYNC event callback
+ 567:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  hdcmi: pointer to the DCMI handle  
+ 568:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 569:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 570:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void HAL_DCMI_VsyncEventCallback(DCMI_HandleTypeDef *hdcmi)
+ 571:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {        
+ 572:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_VsyncEventCallback();
+ 573:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 574:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 575:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 576:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  VSYNC Event callback.
+ 577:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 578:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 579:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** __weak void BSP_CAMERA_VsyncEventCallback(void)
+ 580:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 1277              		.loc 1 580 1 is_stmt 1 view -0
+ 1278              		.cfi_startproc
+ 1279              		@ args = 0, pretend = 0, frame = 0
+ 1280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1281              		@ link register save eliminated.
+ 581:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
+ 582:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****             the HAL_DCMI_VsyncEventCallback could be implemented in the user file
+ 583:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****    */
+ 584:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1282              		.loc 1 584 1 view .LVU323
+ 1283 0000 7047     		bx	lr
+ 1284              		.cfi_endproc
+ 1285              	.LFE159:
+ 1287              		.section	.text.HAL_DCMI_VsyncEventCallback,"ax",%progbits
+ 1288              		.align	1
+ 1289              		.global	HAL_DCMI_VsyncEventCallback
+ 1290              		.syntax unified
+ 1291              		.thumb
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 36
+
+
+ 1292              		.thumb_func
+ 1294              	HAL_DCMI_VsyncEventCallback:
+ 1295              	.LVL81:
+ 1296              	.LFB158:
+ 571:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_VsyncEventCallback();
+ 1297              		.loc 1 571 1 view -0
+ 1298              		.cfi_startproc
+ 1299              		@ args = 0, pretend = 0, frame = 0
+ 1300              		@ frame_needed = 0, uses_anonymous_args = 0
+ 571:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_VsyncEventCallback();
+ 1301              		.loc 1 571 1 is_stmt 0 view .LVU325
+ 1302 0000 08B5     		push	{r3, lr}
+ 1303              	.LCFI24:
+ 1304              		.cfi_def_cfa_offset 8
+ 1305              		.cfi_offset 3, -8
+ 1306              		.cfi_offset 14, -4
+ 572:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1307              		.loc 1 572 3 is_stmt 1 view .LVU326
+ 1308 0002 FFF7FEFF 		bl	BSP_CAMERA_VsyncEventCallback
+ 1309              	.LVL82:
+ 573:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1310              		.loc 1 573 1 is_stmt 0 view .LVU327
+ 1311 0006 08BD     		pop	{r3, pc}
+ 1312              		.cfi_endproc
+ 1313              	.LFE158:
+ 1315              		.section	.text.BSP_CAMERA_FrameEventCallback,"ax",%progbits
+ 1316              		.align	1
+ 1317              		.weak	BSP_CAMERA_FrameEventCallback
+ 1318              		.syntax unified
+ 1319              		.thumb
+ 1320              		.thumb_func
+ 1322              	BSP_CAMERA_FrameEventCallback:
+ 1323              	.LFB161:
+ 585:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 586:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 587:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Frame event callback
+ 588:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  hdcmi: pointer to the DCMI handle  
+ 589:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 590:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 591:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef *hdcmi)
+ 592:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {        
+ 593:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_FrameEventCallback();
+ 594:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 595:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 596:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 597:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Frame Event callback.
+ 598:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 599:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 600:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** __weak void BSP_CAMERA_FrameEventCallback(void)
+ 601:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 1324              		.loc 1 601 1 is_stmt 1 view -0
+ 1325              		.cfi_startproc
+ 1326              		@ args = 0, pretend = 0, frame = 0
+ 1327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1328              		@ link register save eliminated.
+ 602:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
+ 603:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****             the HAL_DCMI_FrameEventCallback could be implemented in the user file
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 37
+
+
+ 604:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****    */
+ 605:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1329              		.loc 1 605 1 view .LVU329
+ 1330 0000 7047     		bx	lr
+ 1331              		.cfi_endproc
+ 1332              	.LFE161:
+ 1334              		.section	.text.HAL_DCMI_FrameEventCallback,"ax",%progbits
+ 1335              		.align	1
+ 1336              		.global	HAL_DCMI_FrameEventCallback
+ 1337              		.syntax unified
+ 1338              		.thumb
+ 1339              		.thumb_func
+ 1341              	HAL_DCMI_FrameEventCallback:
+ 1342              	.LVL83:
+ 1343              	.LFB160:
+ 592:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_FrameEventCallback();
+ 1344              		.loc 1 592 1 view -0
+ 1345              		.cfi_startproc
+ 1346              		@ args = 0, pretend = 0, frame = 0
+ 1347              		@ frame_needed = 0, uses_anonymous_args = 0
+ 592:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_FrameEventCallback();
+ 1348              		.loc 1 592 1 is_stmt 0 view .LVU331
+ 1349 0000 08B5     		push	{r3, lr}
+ 1350              	.LCFI25:
+ 1351              		.cfi_def_cfa_offset 8
+ 1352              		.cfi_offset 3, -8
+ 1353              		.cfi_offset 14, -4
+ 593:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1354              		.loc 1 593 3 is_stmt 1 view .LVU332
+ 1355 0002 FFF7FEFF 		bl	BSP_CAMERA_FrameEventCallback
+ 1356              	.LVL84:
+ 594:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1357              		.loc 1 594 1 is_stmt 0 view .LVU333
+ 1358 0006 08BD     		pop	{r3, pc}
+ 1359              		.cfi_endproc
+ 1360              	.LFE160:
+ 1362              		.section	.text.BSP_CAMERA_ErrorCallback,"ax",%progbits
+ 1363              		.align	1
+ 1364              		.weak	BSP_CAMERA_ErrorCallback
+ 1365              		.syntax unified
+ 1366              		.thumb
+ 1367              		.thumb_func
+ 1369              	BSP_CAMERA_ErrorCallback:
+ 1370              	.LFB163:
+ 606:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 607:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 608:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Error callback
+ 609:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @param  hdcmi: pointer to the DCMI handle  
+ 610:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 611:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 612:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** void HAL_DCMI_ErrorCallback(DCMI_HandleTypeDef *hdcmi)
+ 613:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {        
+ 614:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_ErrorCallback();
+ 615:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 616:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 617:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** /**
+ 618:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @brief  Error callback.
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 38
+
+
+ 619:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   * @retval None
+ 620:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   */
+ 621:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** __weak void BSP_CAMERA_ErrorCallback(void)
+ 622:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** {
+ 1371              		.loc 1 622 1 is_stmt 1 view -0
+ 1372              		.cfi_startproc
+ 1373              		@ args = 0, pretend = 0, frame = 0
+ 1374              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1375              		@ link register save eliminated.
+ 623:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
+ 624:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****             the HAL_DCMI_ErrorCallback could be implemented in the user file
+ 625:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****    */
+ 626:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1376              		.loc 1 626 1 view .LVU335
+ 1377 0000 7047     		bx	lr
+ 1378              		.cfi_endproc
+ 1379              	.LFE163:
+ 1381              		.section	.text.HAL_DCMI_ErrorCallback,"ax",%progbits
+ 1382              		.align	1
+ 1383              		.global	HAL_DCMI_ErrorCallback
+ 1384              		.syntax unified
+ 1385              		.thumb
+ 1386              		.thumb_func
+ 1388              	HAL_DCMI_ErrorCallback:
+ 1389              	.LVL85:
+ 1390              	.LFB162:
+ 613:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_ErrorCallback();
+ 1391              		.loc 1 613 1 view -0
+ 1392              		.cfi_startproc
+ 1393              		@ args = 0, pretend = 0, frame = 0
+ 1394              		@ frame_needed = 0, uses_anonymous_args = 0
+ 613:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c ****   BSP_CAMERA_ErrorCallback();
+ 1395              		.loc 1 613 1 is_stmt 0 view .LVU337
+ 1396 0000 08B5     		push	{r3, lr}
+ 1397              	.LCFI26:
+ 1398              		.cfi_def_cfa_offset 8
+ 1399              		.cfi_offset 3, -8
+ 1400              		.cfi_offset 14, -4
+ 614:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** }
+ 1401              		.loc 1 614 3 is_stmt 1 view .LVU338
+ 1402 0002 FFF7FEFF 		bl	BSP_CAMERA_ErrorCallback
+ 1403              	.LVL86:
+ 615:Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.c **** 
+ 1404              		.loc 1 615 1 is_stmt 0 view .LVU339
+ 1405 0006 08BD     		pop	{r3, pc}
+ 1406              		.cfi_endproc
+ 1407              	.LFE162:
+ 1409              		.section	.bss.hdma_handler.0,"aw",%nobits
+ 1410              		.align	2
+ 1413              	hdma_handler.0:
+ 1414 0000 00000000 		.space	96
+ 1414      00000000 
+ 1414      00000000 
+ 1414      00000000 
+ 1414      00000000 
+ 1415              		.section	.bss.CameraHwAddress,"aw",%nobits
+ 1416              		.align	2
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 39
+
+
+ 1419              	CameraHwAddress:
+ 1420 0000 00000000 		.space	4
+ 1421              		.section	.bss.CameraCurrentResolution,"aw",%nobits
+ 1422              		.align	2
+ 1425              	CameraCurrentResolution:
+ 1426 0000 00000000 		.space	4
+ 1427              		.global	camera_drv
+ 1428              		.section	.bss.camera_drv,"aw",%nobits
+ 1429              		.align	2
+ 1432              	camera_drv:
+ 1433 0000 00000000 		.space	4
+ 1434              		.global	hDcmiHandler
+ 1435              		.section	.bss.hDcmiHandler,"aw",%nobits
+ 1436              		.align	2
+ 1439              	hDcmiHandler:
+ 1440 0000 00000000 		.space	80
+ 1440      00000000 
+ 1440      00000000 
+ 1440      00000000 
+ 1440      00000000 
+ 1441              		.text
+ 1442              	.Letext0:
+ 1443              		.file 2 "D:/arm-none-eabi-gcc/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-too
+ 1444              		.file 3 "D:/arm-none-eabi-gcc/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-too
+ 1445              		.file 4 "Drivers/BSP/STM32746G-Discovery/../Components/ov9655/../Common/camera.h"
+ 1446              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
+ 1447              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 1448              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
+ 1449              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 1450              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dcmi.h"
+ 1451              		.file 10 "Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_camera.h"
+ 1452              		.file 11 "Drivers/BSP/STM32746G-Discovery/../Components/ov9655/ov9655.h"
+ 1453              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h"
+ 1454              		.file 13 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 40
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32746g_discovery_camera.c
+D:\cygwin64\tmp\ccYFzqbW.s:21     .text.GetSize:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:26     .text.GetSize:00000000 GetSize
+D:\cygwin64\tmp\ccYFzqbW.s:40     .text.GetSize:00000008 $d
+D:\cygwin64\tmp\ccYFzqbW.s:44     .text.GetSize:0000000c $t
+D:\cygwin64\tmp\ccYFzqbW.s:89     .text.BSP_CAMERA_ContinuousStart:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:95     .text.BSP_CAMERA_ContinuousStart:00000000 BSP_CAMERA_ContinuousStart
+D:\cygwin64\tmp\ccYFzqbW.s:130    .text.BSP_CAMERA_ContinuousStart:0000001c $d
+D:\cygwin64\tmp\ccYFzqbW.s:1425   .bss.CameraCurrentResolution:00000000 CameraCurrentResolution
+D:\cygwin64\tmp\ccYFzqbW.s:1439   .bss.hDcmiHandler:00000000 hDcmiHandler
+D:\cygwin64\tmp\ccYFzqbW.s:136    .text.BSP_CAMERA_SnapshotStart:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:142    .text.BSP_CAMERA_SnapshotStart:00000000 BSP_CAMERA_SnapshotStart
+D:\cygwin64\tmp\ccYFzqbW.s:177    .text.BSP_CAMERA_SnapshotStart:0000001c $d
+D:\cygwin64\tmp\ccYFzqbW.s:183    .text.BSP_CAMERA_Suspend:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:189    .text.BSP_CAMERA_Suspend:00000000 BSP_CAMERA_Suspend
+D:\cygwin64\tmp\ccYFzqbW.s:209    .text.BSP_CAMERA_Suspend:0000000c $d
+D:\cygwin64\tmp\ccYFzqbW.s:214    .text.BSP_CAMERA_Resume:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:220    .text.BSP_CAMERA_Resume:00000000 BSP_CAMERA_Resume
+D:\cygwin64\tmp\ccYFzqbW.s:240    .text.BSP_CAMERA_Resume:0000000c $d
+D:\cygwin64\tmp\ccYFzqbW.s:245    .text.BSP_CAMERA_PwrUp:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:251    .text.BSP_CAMERA_PwrUp:00000000 BSP_CAMERA_PwrUp
+D:\cygwin64\tmp\ccYFzqbW.s:326    .text.BSP_CAMERA_PwrUp:00000048 $d
+D:\cygwin64\tmp\ccYFzqbW.s:332    .text.BSP_CAMERA_PwrDown:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:338    .text.BSP_CAMERA_PwrDown:00000000 BSP_CAMERA_PwrDown
+D:\cygwin64\tmp\ccYFzqbW.s:408    .text.BSP_CAMERA_PwrDown:00000044 $d
+D:\cygwin64\tmp\ccYFzqbW.s:414    .text.BSP_CAMERA_Stop:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:420    .text.BSP_CAMERA_Stop:00000000 BSP_CAMERA_Stop
+D:\cygwin64\tmp\ccYFzqbW.s:457    .text.BSP_CAMERA_Stop:00000018 $d
+D:\cygwin64\tmp\ccYFzqbW.s:462    .text.BSP_CAMERA_ContrastBrightnessConfig:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:468    .text.BSP_CAMERA_ContrastBrightnessConfig:00000000 BSP_CAMERA_ContrastBrightnessConfig
+D:\cygwin64\tmp\ccYFzqbW.s:506    .text.BSP_CAMERA_ContrastBrightnessConfig:00000018 $d
+D:\cygwin64\tmp\ccYFzqbW.s:1432   .bss.camera_drv:00000000 camera_drv
+D:\cygwin64\tmp\ccYFzqbW.s:1419   .bss.CameraHwAddress:00000000 CameraHwAddress
+D:\cygwin64\tmp\ccYFzqbW.s:512    .text.BSP_CAMERA_BlackWhiteConfig:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:518    .text.BSP_CAMERA_BlackWhiteConfig:00000000 BSP_CAMERA_BlackWhiteConfig
+D:\cygwin64\tmp\ccYFzqbW.s:554    .text.BSP_CAMERA_BlackWhiteConfig:00000018 $d
+D:\cygwin64\tmp\ccYFzqbW.s:560    .text.BSP_CAMERA_ColorEffectConfig:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:566    .text.BSP_CAMERA_ColorEffectConfig:00000000 BSP_CAMERA_ColorEffectConfig
+D:\cygwin64\tmp\ccYFzqbW.s:602    .text.BSP_CAMERA_ColorEffectConfig:00000018 $d
+D:\cygwin64\tmp\ccYFzqbW.s:608    .text.BSP_CAMERA_MspInit:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:614    .text.BSP_CAMERA_MspInit:00000000 BSP_CAMERA_MspInit
+D:\cygwin64\tmp\ccYFzqbW.s:945    .text.BSP_CAMERA_MspInit:0000016c $d
+D:\cygwin64\tmp\ccYFzqbW.s:1413   .bss.hdma_handler.0:00000000 hdma_handler.0
+D:\cygwin64\tmp\ccYFzqbW.s:957    .text.BSP_CAMERA_Init:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:963    .text.BSP_CAMERA_Init:00000000 BSP_CAMERA_Init
+D:\cygwin64\tmp\ccYFzqbW.s:1117   .text.BSP_CAMERA_Init:00000098 $d
+D:\cygwin64\tmp\ccYFzqbW.s:1127   .text.BSP_CAMERA_MspDeInit:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1133   .text.BSP_CAMERA_MspDeInit:00000000 BSP_CAMERA_MspDeInit
+D:\cygwin64\tmp\ccYFzqbW.s:1173   .text.BSP_CAMERA_MspDeInit:00000024 $d
+D:\cygwin64\tmp\ccYFzqbW.s:1178   .text.BSP_CAMERA_DeInit:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1184   .text.BSP_CAMERA_DeInit:00000000 BSP_CAMERA_DeInit
+D:\cygwin64\tmp\ccYFzqbW.s:1216   .text.BSP_CAMERA_DeInit:0000001c $d
+D:\cygwin64\tmp\ccYFzqbW.s:1222   .text.BSP_CAMERA_LineEventCallback:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1228   .text.BSP_CAMERA_LineEventCallback:00000000 BSP_CAMERA_LineEventCallback
+D:\cygwin64\tmp\ccYFzqbW.s:1241   .text.HAL_DCMI_LineEventCallback:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1247   .text.HAL_DCMI_LineEventCallback:00000000 HAL_DCMI_LineEventCallback
+ARM GAS  D:\cygwin64\tmp\ccYFzqbW.s 			page 41
+
+
+D:\cygwin64\tmp\ccYFzqbW.s:1269   .text.BSP_CAMERA_VsyncEventCallback:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1275   .text.BSP_CAMERA_VsyncEventCallback:00000000 BSP_CAMERA_VsyncEventCallback
+D:\cygwin64\tmp\ccYFzqbW.s:1288   .text.HAL_DCMI_VsyncEventCallback:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1294   .text.HAL_DCMI_VsyncEventCallback:00000000 HAL_DCMI_VsyncEventCallback
+D:\cygwin64\tmp\ccYFzqbW.s:1316   .text.BSP_CAMERA_FrameEventCallback:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1322   .text.BSP_CAMERA_FrameEventCallback:00000000 BSP_CAMERA_FrameEventCallback
+D:\cygwin64\tmp\ccYFzqbW.s:1335   .text.HAL_DCMI_FrameEventCallback:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1341   .text.HAL_DCMI_FrameEventCallback:00000000 HAL_DCMI_FrameEventCallback
+D:\cygwin64\tmp\ccYFzqbW.s:1363   .text.BSP_CAMERA_ErrorCallback:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1369   .text.BSP_CAMERA_ErrorCallback:00000000 BSP_CAMERA_ErrorCallback
+D:\cygwin64\tmp\ccYFzqbW.s:1382   .text.HAL_DCMI_ErrorCallback:00000000 $t
+D:\cygwin64\tmp\ccYFzqbW.s:1388   .text.HAL_DCMI_ErrorCallback:00000000 HAL_DCMI_ErrorCallback
+D:\cygwin64\tmp\ccYFzqbW.s:1410   .bss.hdma_handler.0:00000000 $d
+D:\cygwin64\tmp\ccYFzqbW.s:1416   .bss.CameraHwAddress:00000000 $d
+D:\cygwin64\tmp\ccYFzqbW.s:1422   .bss.CameraCurrentResolution:00000000 $d
+D:\cygwin64\tmp\ccYFzqbW.s:1429   .bss.camera_drv:00000000 $d
+D:\cygwin64\tmp\ccYFzqbW.s:1436   .bss.hDcmiHandler:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_DCMI_Start_DMA
+HAL_DCMI_Suspend
+HAL_DCMI_Resume
+HAL_GPIO_Init
+HAL_GPIO_WritePin
+HAL_Delay
+HAL_DCMI_Stop
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_DMA_Init
+ov9655_ReadID
+HAL_DCMI_Init
+HAL_DCMI_DisableCrop
+HAL_DCMI_ConfigCrop
+HAL_DCMI_EnableCrop
+ov9655_drv
+HAL_NVIC_DisableIRQ
+HAL_DMA_DeInit
+HAL_DCMI_DeInit

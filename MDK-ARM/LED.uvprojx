@@ -48,8 +48,8 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>LED\</OutputDirectory>
-          <OutputName>LED</OutputName>
+          <OutputDirectory>..\build\</OutputDirectory>
+          <OutputName>SW-Runtime.hex</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F746xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>..\Core\Inc;..\Drivers\STM32F7xx_HAL_Driver\Inc;..\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy;..\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\Drivers\CMSIS\Include;..\Drivers\BSP\STM32746G-Discovery;..\Drivers\BSP\Components\rk043fn48h;..\Fonts;..\Drivers\BSP\Components\ov9655</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -514,6 +514,51 @@
               <FileType>1</FileType>
               <FilePath>../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_exti.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f7xx_hal_dma2d.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma2d.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_ll_fmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_fmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_ll_sdmmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_sdmmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_hal_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_hal_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_sdram.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_hal_dcmi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dcmi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_hal_dcmi_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dcmi_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_hal_ltdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_ltdc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_hal_ltdc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_ltdc_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -523,6 +568,46 @@
               <FileName>system_stm32f7xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/system_stm32f7xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/STM32746G-Discovery</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32746g_discovery.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32746g_discovery_camera.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_camera.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32746g_discovery_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32746g_discovery_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32746g_discovery_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery_sdram.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/Components/ov9655</GroupName>
+          <Files>
+            <File>
+              <FileName>ov9655.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\BSP\Components\ov9655\ov9655.c</FilePath>
             </File>
           </Files>
         </Group>
